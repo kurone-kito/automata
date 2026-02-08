@@ -1,8 +1,9 @@
 provider "multipass" {}
 
 resource "multipass_instance" "build" {
-  image = "resolute"
-  name  = "automata"
+  cloudinit_file = "${path.module}/cloud-init.yml"
+  image          = "resolute"
+  name           = "automata"
 }
 
 terraform {
