@@ -8,11 +8,16 @@ package_update: true
 package_upgrade: true
 packages:
   - ca-certificates
+  - coreutils
   - curl
   - gpg
+  - gh
   - git
+  - htop
   - language-pack-ja
+  - p7zip-full
   - wget
+  - yq
 runcmd:
   - sudo -u ubuntu sh -c 'curl -fsSL https://gh.io/copilot-install | bash'
   - apt-get -y autoremove
