@@ -6,6 +6,8 @@ Terraform を使用した、Multipass 仮想環境の自動構築ツール
 
 ## システム要件
 
+- 6GB 以上の RAM (macOS・Windowsの場合、さらに +6GB 推奨)
+- 10GB 以上のストレージ容量
 - Multipass v1.16 以降
 - Terraform v1.14 以降
 
