@@ -8,6 +8,7 @@ Linux 環境構築の実験用リポジトリ
 
 - Debian 系の Linux OS
 - macOS (仮想環境で動作)
+- Multipass v1.16 以降
 - Terraform v1.14 以降
 
 ## セットアップ
