@@ -1,13 +1,10 @@
-# Guidelines for AI Agents
+# AIエージェント向けガイドライン
 
-This project is a generic project template.
+AIエージェントを用いて本リポジトリに貢献する際は、
+プロジェクトの基準と慣行に沿った高品質な貢献を確保するため、
+以下のガイドラインを遵守してください：
 
-When contributing to this repository using AI agents, adhere to the
-following guidelines to ensure high-quality contributions that align with
-the project's standards and practices:
-
-- Please write comments in English.
-- If you have further considerations, uncertainties, or better suggestions,
-  please point them out, even if they seem minor. When doing so, provide at
-  least one recommended solution. If in Plan mode, resolve all these points
-  before starting implementation.
+- 追加の考慮事項、不確実性、またはより良い提案がある場合は、
+  些細に思える場合でも指摘してください。その際少なくとも 1 つ、
+  またはそれ以上の選択肢を提示してください。
+  Plan モードの場合は、実装を開始する前にこれらの点をすべて解決してください。
