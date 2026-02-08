@@ -14,6 +14,7 @@ packages:
   - language-pack-ja
   - wget
 runcmd:
+  - sudo -u ubuntu sh -c 'curl -fsSL https://gh.io/copilot-install | bash'
   - apt-get -y autoremove
   - apt-get clean
 timezone: Asia/Tokyo
