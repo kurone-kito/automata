@@ -7,7 +7,12 @@ package_reboot_if_required: true
 package_update: true
 package_upgrade: true
 packages:
+  - ca-certificates
+  - curl
+  - gpg
+  - git
   - language-pack-ja
+  - wget
 runcmd:
   - apt-get -y autoremove
   - apt-get clean
