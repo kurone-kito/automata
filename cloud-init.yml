@@ -100,3 +100,21 @@ write_files:
         max_size_mb: 50
   - path: /etc/skel/.sudo_as_admin_successful
     content: ''
+  - path: /etc/skel/blog/.gitkeep
+    content: ''
+  - path: /etc/skel/kanban/0-icebox/.gitkeep
+    content: ''
+  - path: /etc/skel/kanban/1-backlog/.gitkeep
+    content: ''
+  - path: /etc/skel/kanban/2-in-progress/.gitkeep
+    content: ''
+  - path: /etc/skel/kanban/3-done/.gitkeep
+    content: ''
+  - path: /etc/skel/kanban/4-archive/.gitkeep
+    content: ''
+  - path: /etc/skel/kanban/5-trash/.gitkeep
+    content: ''
+  - path: /etc/skel/requests/.gitkeep
+    content: ''
+  - path: /etc/skel/requests/processed/.gitkeep
+    content: ''
