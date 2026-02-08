@@ -2,7 +2,14 @@
 package_reboot_if_required: true
 package_update: true
 package_upgrade: true
+runcmd:
+  - apt-get autoremove -y
+  - apt-get clean
 write_files:
+  - path: /etc/apt/apt.conf.d/99no-recommends
+    content: |
+      APT::Install-Recommends "false";
+      APT::Install-Suggests "false";
   - path: /etc/apt/preferences.d/999-hold-kernel.pref
     content: |
       Package: linux-generic*
