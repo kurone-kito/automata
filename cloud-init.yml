@@ -20,6 +20,7 @@ packages:
   - yq
 runcmd:
   - sudo -u ubuntu sh -c 'curl -fsSL https://gh.io/copilot-install | bash'
+  - systemctl daemon-reload
   - apt-get -y autoremove
   - apt-get clean
 timezone: Asia/Tokyo
@@ -498,3 +499,23 @@ write_files:
     content: ''
   - path: /etc/skel/requests/processed/.gitkeep
     content: ''
+  - path: /etc/systemd/system/copilot-agent.service
+    content: |
+      [Unit]
+      Description=Automata - Copilot Autonomous Agent
+      After=cloud-init.target network-online.target
+      Wants=network-online.target
+
+      [Service]
+      Type=simple
+      User=ubuntu
+      Group=ubuntu
+      WorkingDirectory=/home/ubuntu
+      ExecStart=/home/ubuntu/.local/bin/agent.sh
+      Restart=always
+      RestartSec=60
+      Environment=HOME=/home/ubuntu
+      Environment=PATH=/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+      [Install]
+      WantedBy=multi-user.target
