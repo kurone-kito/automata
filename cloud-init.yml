@@ -98,6 +98,359 @@ write_files:
       session:
         # Copilot CLI セッション状態の最大サイズ (MB)
         max_size_mb: 50
+  - path: /etc/skel/.local/bin/agent.sh
+    permissions: '0755'
+    content: |
+      #!/bin/bash
+      set -euo pipefail
+
+      CONFIG_FILE="$HOME/.config/automata/config.yml"
+      BLOG_DIR="$HOME/blog"
+      KANBAN_DIR="$HOME/kanban"
+      AUDIT_DIR="$HOME/audit-log"
+      REQUESTS_DIR="$HOME/requests"
+      PROMPT_TMP="/tmp/agent-prompt.md"
+      CONTEXT_DUMP="/tmp/agent-context-dump.md"
+      TODAY=$(date +%Y-%m-%d)
+
+      # --- 設定読み込み (yq ベース) ---
+      read_config() {
+        local jq_filter="$1"
+        local fallback="${2:-}"
+        local val
+        val=$(yq -r "$jq_filter" "$CONFIG_FILE" 2>/dev/null) || val=""
+        if [ -z "$val" ] || [ "$val" = "null" ]; then
+          echo "$fallback"
+        else
+          echo "$val"
+        fi
+      }
+
+      read_config_list() {
+        local jq_filter="$1"
+        yq -r "$jq_filter // empty | .[]" "$CONFIG_FILE" 2>/dev/null || true
+      }
+
+      # --- モデル解決 ---
+      resolve_model() {
+        local model_config="$1"
+        # model_groups にグループ名として存在するか確認
+        local group_models
+        group_models=$(yq -r --arg g "$model_config" '.model_groups[$g] // empty | .[]' "$CONFIG_FILE" 2>/dev/null) || group_models=""
+        if [ -n "$group_models" ]; then
+          # グループ内からランダムに 1 つ選択
+          echo "$group_models" | shuf -n1
+        else
+          # グループ名でなければ直接モデル名として使用
+          echo "$model_config"
+        fi
+      }
+
+      INTERVAL=$(read_config '.agent.restart_interval' '60')
+      MODEL_CONFIG=$(read_config '.agent.model' 'low')
+      MODEL=$(resolve_model "$MODEL_CONFIG")
+      COPILOT=$(read_config '.agent.copilot_path' '/home/ubuntu/.local/bin/copilot')
+      COPILOT_FLAGS=$(read_config '.agent.copilot_flags' '--allow-all')
+
+      # --- 監査ログ書き込み ---
+      write_audit() {
+        local event_type="$1"
+        local description="$2"
+        local task_ref="${3:-}"
+        local audit_file="$AUDIT_DIR/$TODAY.md"
+        if [ ! -f "$audit_file" ]; then
+          echo "# 監査ログ: $TODAY" > "$audit_file"
+          echo "" >> "$audit_file"
+        fi
+        {
+          echo "## $(date '+%Y-%m-%d %H:%M:%S') — $event_type"
+          echo ""
+          echo "$description"
+          if [ -n "$task_ref" ]; then
+            echo ""
+            echo "関連タスク: $task_ref"
+          fi
+          echo ""
+          echo "---"
+          echo ""
+        } >> "$audit_file"
+      }
+
+      # --- ブログ書き込み ---
+      write_blog() {
+        local content="$1"
+        local blog_file="$BLOG_DIR/$TODAY.md"
+        if [ ! -f "$blog_file" ]; then
+          echo "# ブログ: $TODAY" > "$blog_file"
+          echo "" >> "$blog_file"
+        fi
+        {
+          echo "### $(date '+%H:%M:%S')"
+          echo ""
+          echo "$content"
+          echo ""
+        } >> "$blog_file"
+      }
+
+      # --- クラッシュ時コンテキストダンプ ---
+      cleanup() {
+        local exit_code=$?
+        if [ $exit_code -ne 0 ]; then
+          {
+            echo "# コンテキストダンプ: $(date '+%Y-%m-%d %H:%M:%S')"
+            echo ""
+            echo "## 終了コード: $exit_code"
+            echo ""
+            echo "## 直前のプロンプト"
+            echo ""
+            if [ -f "$PROMPT_TMP" ]; then
+              cat "$PROMPT_TMP"
+            else
+              echo "(プロンプトファイルなし)"
+            fi
+            echo ""
+            echo "## 環境状態"
+            echo ""
+            echo "- ディスク使用量: $(df -h "${HOME}" | tail -1)"
+            echo "- メモリ: $(free -h | grep Mem)"
+            echo "- uptime: $(uptime)"
+          } > "$CONTEXT_DUMP"
+          write_audit "クラッシュ" "エージェントが異常終了しました。コンテキストダンプ: $CONTEXT_DUMP"
+        fi
+      }
+      trap cleanup EXIT
+
+      # --- 認証チェック ---
+      check_auth() {
+        [ -f "${HOME}/.copilot/config.json" ]
+      }
+
+      # --- セッション状態クリア ---
+      clean_session_state() {
+        local state_dir="${HOME}/.copilot/session-state"
+        [ -d "$state_dir" ] || return 0
+        local max_mb
+        max_mb=$(read_config '.session.max_size_mb' '50')
+        local current_mb
+        current_mb=$(du -sm "$state_dir" 2>/dev/null | cut -f1)
+        current_mb=${current_mb:-0}
+        if [ "$current_mb" -gt "$max_mb" ]; then
+          write_audit "メンテナンス" "セッション状態を清掃します (${current_mb}MB > ${max_mb}MB)"
+          find "$state_dir" -type f -mmin +60 -delete 2>/dev/null || true
+        fi
+      }
+
+      # --- 日次セッション状態リセット ---
+      daily_session_reset() {
+        local state_dir="${HOME}/.copilot/session-state"
+        [ -d "$state_dir" ] || return 0
+        write_audit "メンテナンス" "日次セッション状態リセットを実行します"
+        find "$state_dir" -type f -delete 2>/dev/null || true
+      }
+
+      # --- カンバンからタスク取得 ---
+      get_current_task() {
+        for state in 2-in-progress 1-backlog; do
+          local dir="$KANBAN_DIR/$state"
+          local task
+          task=$(find "$dir" -maxdepth 1 -name '*.md' -type f 2>/dev/null | head -1)
+          if [ -n "$task" ]; then
+            echo "$task"
+            return 0
+          fi
+        done
+        # 0-icebox からプロジェクト参照
+        local icebox_task
+        icebox_task=$(find "$KANBAN_DIR/0-icebox" -maxdepth 1 -name '*.md' -type f 2>/dev/null | head -1)
+        if [ -n "$icebox_task" ]; then
+          echo "$icebox_task"
+          return 0
+        fi
+        echo ""
+      }
+
+      # --- リクエスト処理専用プロンプト構築 ---
+      build_request_prompt() {
+        local request_file="$1"
+        {
+          echo "# リクエスト処理指示"
+          echo ""
+          echo "あなたは自律駆動エージェントです。"
+          echo "以下のリクエストを読み取り、要約を kanban/0-icebox/ に Markdown ファイルとして作成してください。"
+          echo ""
+          echo "## 処理ルール"
+          echo ""
+          echo "- 可能な限り日本語で思考・記述する"
+          echo "- ファイル名は内容を簡潔に表すスラグ形式で（例: improve-logging.md）"
+          echo "- 要約には: 目的、想定される作業内容、見積もり難易度を含める"
+          echo "- 元のリクエストの意図を歪めないこと"
+          echo "- 完了後、他の作業は行わないこと"
+          echo ""
+          echo "## 対象リクエスト"
+          echo ""
+          echo "ファイル: $(basename "$request_file")"
+          echo ""
+          cat "$request_file"
+          echo ""
+          echo "## カンバン概要"
+          echo ""
+          for state in 0-icebox 1-backlog 2-in-progress 3-done; do
+            local count
+            count=$(find "$KANBAN_DIR/$state" -maxdepth 1 -name '*.md' -type f 2>/dev/null | wc -l)
+            echo "- $state: ${count}件"
+          done
+          echo ""
+          echo "## 作業ディレクトリ"
+          echo ""
+          echo "- カンバン: $KANBAN_DIR"
+          echo "- 要求: $REQUESTS_DIR"
+        } > "$PROMPT_TMP"
+      }
+
+      # --- コンテキスト収集・タスク実行プロンプト構築 ---
+      build_prompt() {
+        local task_file="$1"
+        {
+          echo "# エージェント指示"
+          echo ""
+          echo "あなたは自律駆動エージェントです。以下の方針に従い、割り当てられたタスクを実行してください。"
+          echo ""
+          echo "## 方針"
+          echo ""
+          read_config_list '.prompt.guidelines' | while IFS= read -r line; do
+            [ -n "$line" ] && echo "- $line"
+          done
+          echo ""
+          echo "## カンバン状況"
+          echo ""
+          echo "### 現在のタスク"
+          echo ""
+          if [ -n "$task_file" ] && [ -f "$task_file" ]; then
+            echo "ファイル: $task_file"
+            echo ""
+            cat "$task_file"
+          else
+            echo "(タスクなし — 0-icebox からプロジェクトを生成してください)"
+          fi
+          echo ""
+          echo "### カンバン概要"
+          echo ""
+          for state in 0-icebox 1-backlog 2-in-progress 3-done; do
+            local count
+            count=$(find "$KANBAN_DIR/$state" -maxdepth 1 -name '*.md' -type f 2>/dev/null | wc -l)
+            echo "- $state: ${count}件"
+          done
+          echo ""
+          echo "## 直近のブログ"
+          echo ""
+          local recent_blog
+          recent_blog=$(find "$BLOG_DIR" -maxdepth 1 -name "*.md" -type f -printf "%T@ %p\n" 2>/dev/null | sort -rn | head -1 | cut -d" " -f2-)
+          if [ -n "$recent_blog" ] && [ -f "$recent_blog" ]; then
+            tail -50 "$recent_blog"
+          else
+            echo "(ブログエントリなし)"
+          fi
+          echo ""
+          echo "## 直近の監査ログ"
+          echo ""
+          local recent_audit
+          recent_audit=$(find "$AUDIT_DIR" -maxdepth 1 -name "*.md" -type f -printf "%T@ %p\n" 2>/dev/null | sort -rn | head -1 | cut -d" " -f2-)
+          if [ -n "$recent_audit" ] && [ -f "$recent_audit" ]; then
+            tail -30 "$recent_audit"
+          else
+            echo "(監査ログなし)"
+          fi
+          echo ""
+          echo "## 作業ディレクトリ"
+          echo ""
+          echo "- ブログ: $BLOG_DIR"
+          echo "- カンバン: $KANBAN_DIR"
+          echo "- 監査ログ: $AUDIT_DIR"
+          echo "- 要求: $REQUESTS_DIR"
+          echo "- 設定: $CONFIG_FILE"
+          echo ""
+          echo "## 注意事項"
+          echo ""
+          echo "- 作業結果はブログに簡潔なダイジェストとして記録してください"
+          echo "- タスクが完了した場合、カンバンの該当ファイルを 3-done/ に移動してください"
+          echo "- 新たなタスクが必要な場合、カンバンの適切なステートにファイルを作成してください"
+          echo "- 1-backlog にタスクがない場合、icebox を参照して小プロジェクト・タスクを生成してください"
+        } > "$PROMPT_TMP"
+      }
+
+      # --- メインループ ---
+      PREV_TODAY=""
+      write_audit "起動" "エージェントを起動しました (モデル設定: ${MODEL_CONFIG}, 解決済みモデル: ${MODEL})"
+
+      while true; do
+        TODAY=$(date +%Y-%m-%d)
+
+        # 日付変更時にセッション状態をリセット
+        if [ -n "$PREV_TODAY" ] && [ "$TODAY" != "$PREV_TODAY" ]; then
+          daily_session_reset
+        fi
+        PREV_TODAY="$TODAY"
+
+        if ! check_auth; then
+          write_audit "認証エラー" "Copilot CLI の認証が未完了です。${INTERVAL}秒後にリトライします。"
+          sleep "$INTERVAL"
+          continue
+        fi
+
+        # Phase 1: リクエスト処理（最優先）
+        pending_request=$(find "$REQUESTS_DIR" -maxdepth 1 -name '*.md' -type f -printf "%T@ %p\n" 2>/dev/null | sort -n | head -1 | cut -d" " -f2-)
+
+        if [ -n "$pending_request" ] && [ -f "$pending_request" ]; then
+          req_name=$(basename "$pending_request")
+          build_request_prompt "$pending_request"
+          write_audit "リクエスト処理開始" "リクエストを処理します: $req_name"
+
+          output=""
+          exit_code=0
+          output=$($COPILOT $COPILOT_FLAGS --model "$MODEL" -p "$(cat "$PROMPT_TMP")" 2>&1) || exit_code=$?
+
+          # 成否問わず processed/ に強制移動
+          mkdir -p "$REQUESTS_DIR/processed"
+          mv "$pending_request" "$REQUESTS_DIR/processed/" 2>/dev/null || true
+
+          if [ $exit_code -eq 0 ]; then
+            write_audit "リクエスト処理完了" "リクエストを処理しました: $req_name\n出力の先頭:\n$(echo "$output" | head -20)"
+            write_blog "リクエスト処理: ${req_name}\n\n$(echo "$output" | head -10)\n\n処理完了 → processed/ に移動"
+          else
+            write_audit "リクエスト処理エラー" "リクエスト処理が失敗しました (code: ${exit_code}): $req_name\n出力:\n$(echo "$output" | tail -20)"
+            write_blog "リクエスト処理: ${req_name}\n\nエラー発生 (code: ${exit_code})\n強制的に processed/ に移動"
+          fi
+
+        # Phase 2: 通常タスク実行（リクエストがない場合のみ）
+        else
+          task_file=$(get_current_task)
+          task_name=""
+          if [ -n "$task_file" ]; then
+            task_name=$(basename "$task_file" .md)
+          fi
+
+          build_prompt "$task_file"
+          write_audit "実行開始" "プロンプトを構築し、Copilot CLI を実行します" "$task_name"
+
+          output=""
+          exit_code=0
+          output=$($COPILOT $COPILOT_FLAGS --model "$MODEL" -p "$(cat "$PROMPT_TMP")" 2>&1) || exit_code=$?
+
+          if [ $exit_code -eq 0 ]; then
+            write_audit "実行完了" "Copilot CLI が正常に完了しました。出力の先頭:\n$(echo "$output" | head -20)" "$task_name"
+            write_blog "タスク: ${task_name:-なし}\n\n$(echo "$output" | head -10)\n\n進捗: 実行完了"
+          else
+            write_audit "実行エラー" "Copilot CLI が終了コード ${exit_code} で失敗しました。出力:\n$(echo "$output" | tail -20)" "$task_name"
+            write_blog "タスク: ${task_name:-なし}\n\nエラー発生 (code: ${exit_code})\n\n$(echo "$output" | tail -5)"
+          fi
+        fi
+
+        # メンテナンス
+        clean_session_state
+        "$HOME/.local/bin/archive.sh" 2>/dev/null || true
+
+        sleep "$INTERVAL"
+      done
   - path: /etc/skel/.local/bin/archive.sh
     permissions: '0755'
     content: |
@@ -107,7 +460,8 @@ write_files:
       CONFIG_FILE="$HOME/.config/automata/config.yml"
       KANBAN_DIR="$HOME/kanban"
 
-      THRESHOLD=$(grep -E '^\s+threshold:' "$CONFIG_FILE" | head -1 | sed 's/.*:\s*//' | tr -d "'")
+      THRESHOLD=$(yq -r '.archive.threshold // 100' "$CONFIG_FILE" 2>/dev/null)
+      THRESHOLD=${THRESHOLD:-100}
 
       for state in 4-archive 5-trash; do
         dir="$KANBAN_DIR/$state"

@@ -1,6 +1,7 @@
 allowCompoundWords: true
 dictionaries:
   - cpp
+  - cpp-compound-words
   - en_US
   - en-gb
   - git
@@ -28,3 +29,4 @@ words:
   - kuron
   - kuroné
   - larstobi
+  - shuf
