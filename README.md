@@ -6,6 +6,7 @@ Linux 環境構築の実験用リポジトリ
 
 ## システム要件
 
+- 6GB 以上の RAM (仮想 PC を使用する場合、さらに +3GB 推奨)
 - Debian 系の Linux OS
 - macOS (仮想環境で動作)
 - Multipass v1.16 以降
