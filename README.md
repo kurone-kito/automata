@@ -2,10 +2,11 @@
 
 [![Linting](https://github.com/kurone-kito/automate/actions/workflows/lint.yml/badge.svg)](https://github.com/kurone-kito/automate/actions/workflows/lint.yml)
 
-Terraform の実験用リポジトリ
+Terraform を使用した、Multipass 仮想環境の自動構築ツール
 
 ## システム要件
 
+- Multipass v1.16 以降
 - Terraform v1.14 以降
 
 ## 環境の起動・停止
