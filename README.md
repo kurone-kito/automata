@@ -8,11 +8,18 @@ Linux 環境構築の実験用リポジトリ
 
 - Debian 系の Linux OS
 - macOS (仮想環境で動作)
+- Terraform v1.14 以降
 
 ## セットアップ
 
 ```sh
 ./setup
+```
+
+## 仮想環境の破棄
+
+```sh
+./nuke
 ```
 
 ## 貢献

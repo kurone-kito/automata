@@ -5,4 +5,5 @@
 set -eu
 cd "$(cd "$(dirname "$0")"; pwd)/.."
 
-echo "Mode: virtual environment (Multipass via Terraform) -- not yet implemented"
+terraform init
+terraform apply -auto-approve
