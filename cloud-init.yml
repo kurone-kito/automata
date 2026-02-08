@@ -57,5 +57,46 @@ write_files:
       Package: linux-virtual*
       Pin: release a=*
       Pin-Priority: -1
+  - path: /etc/skel/.config/automata/config.yml
+    content: |
+      # Automata エージェント設定
+      agent:
+        # エージェント再起動間隔（秒）
+        restart_interval: 60
+        # 使用モデル
+        # - model_groups のグループ名（high/medium/low）を指定
+        # - エージェント起動時に 1 回だけランダム選択する
+        model: low
+        # copilot CLI パス
+        copilot_path: /home/ubuntu/.local/bin/copilot
+        # copilot CLI フラグ
+        copilot_flags: --allow-all
+      archive:
+        # archive/trash の 7z 圧縮閾値（件数）
+        threshold: 100
+      model_groups:
+        # 高性能モデル（複雑なタスク向け）
+        high:
+          - claude-opus-4.6
+        # 標準モデル（日常タスク向け）
+        medium:
+          - claude-sonnet-4.5
+          - gemini-3-pro-preview
+          - gpt-5.2-codex
+        # 軽量モデル（シンプルなタスク向け）
+        low:
+          - claude-haiku-4.5
+          - gpt-5.1-codex-mini
+      prompt:
+        # エージェントへの方針指示
+        guidelines:
+          - 可能な限り日本語で思考・記述する
+          - 仮想環境での自律駆動の安定性を最優先とする
+          - Web へのアクセスは法律・規約を遵守する範囲で行う
+          - 欲張らず、1つずつ確実に実行していく
+          - リスクのあるコマンドを実行する際は、まずブログにその旨を書き出し、反復してリスク度を評価し、安全であれば実行、危険であれば代替手段を模索する
+      session:
+        # Copilot CLI セッション状態の最大サイズ (MB)
+        max_size_mb: 50
   - path: /etc/skel/.sudo_as_admin_successful
     content: ''
