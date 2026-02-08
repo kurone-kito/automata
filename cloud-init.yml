@@ -1,10 +1,17 @@
 #cloud-config
+keyboard:
+  layout: jp
+  model: jp106
+locale: ja_JP.UTF-8
 package_reboot_if_required: true
 package_update: true
 package_upgrade: true
+packages:
+  - language-pack-ja
 runcmd:
   - apt-get autoremove -y
   - apt-get clean
+timezone: Asia/Tokyo
 write_files:
   - path: /etc/apt/apt.conf.d/99no-recommends
     content: |
