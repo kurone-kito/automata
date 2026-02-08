@@ -98,6 +98,32 @@ write_files:
       session:
         # Copilot CLI セッション状態の最大サイズ (MB)
         max_size_mb: 50
+  - path: /etc/skel/.local/bin/archive.sh
+    permissions: '0755'
+    content: |
+      #!/bin/bash
+      set -euo pipefail
+
+      CONFIG_FILE="$HOME/.config/automata/config.yml"
+      KANBAN_DIR="$HOME/kanban"
+
+      THRESHOLD=$(grep -E '^\s+threshold:' "$CONFIG_FILE" | head -1 | sed 's/.*:\s*//' | tr -d "'")
+
+      for state in 4-archive 5-trash; do
+        dir="$KANBAN_DIR/$state"
+        count=$(find "$dir" -maxdepth 1 -name '*.md' -type f 2>/dev/null | wc -l)
+        if [ "$count" -ge "$THRESHOLD" ]; then
+          archive_name="${state}-$(date +%Y%m%d-%H%M%S).7z"
+          cd "$dir"
+          find . -maxdepth 1 -name '*.md' -type f -print0 | \
+            sort -z | head -z -n "$THRESHOLD" | \
+            xargs -0 7z a "$archive_name" >/dev/null 2>&1
+          find . -maxdepth 1 -name '*.md' -type f -print0 | \
+            sort -z | head -z -n "$THRESHOLD" | \
+            xargs -0 rm -f
+          cd - >/dev/null
+        fi
+      done
   - path: /etc/skel/.sudo_as_admin_successful
     content: ''
   - path: /etc/skel/blog/.gitkeep
