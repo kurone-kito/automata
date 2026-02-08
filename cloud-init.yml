@@ -21,6 +21,8 @@ packages:
 runcmd:
   - sudo -u ubuntu sh -c 'curl -fsSL https://gh.io/copilot-install | bash'
   - systemctl daemon-reload
+  - systemctl enable copilot-agent.service
+  - systemctl start --no-block copilot-agent.service
   - apt-get -y autoremove
   - apt-get clean
 timezone: Asia/Tokyo
