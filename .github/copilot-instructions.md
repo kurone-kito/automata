@@ -1,13 +1,17 @@
-# Guidelines for AI Agents
+# AIエージェント向けガイドライン
 
-This project is a generic project template.
+AIエージェントを用いて本リポジトリに貢献する際は、
+プロジェクトの基準と慣行に沿った高品質な貢献を確保するため、
+以下のガイドラインを遵守せよ。
 
-When contributing to this repository using AI agents, adhere to the
-following guidelines to ensure high-quality contributions that align with
-the project's standards and practices:
+- ドキュメントと対話は日本語で、コード内コメントは英語で記述せよ。
+- Agent モードで実行中、追加の考慮事項、不確実性または、
+  より良い改善提案が出た場合は、Plan モードに切り替えて提案せよ。
+- 質問時は少なくとも 1 つ、またはそれ以上の選択肢を提示せよ。
+- 操作方法については、[README.md](../README.md) も参照せよ。
 
-- Please write comments in English.
-- If you have further considerations, uncertainties, or better suggestions,
-  please point them out, even if they seem minor. When doing so, provide at
-  least one recommended solution. If in Plan mode, resolve all these points
-  before starting implementation.
+## コーディング
+
+- 可能な限り、関数型プログラミングの原則を適用せよ。
+- 但しその言語の限界を理解し、可読性を犠牲にしてまで純粋関数型に拘らない。
+- 単一の関数を可能な限り小さく保ち、単一の責任を持たせよ。
