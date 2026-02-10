@@ -1,0 +1,4 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.3.14/schema.json",
+  "extends": ["./node_modules/@kurone-kito/biome-config/biome.json"]
+}

@@ -24,6 +24,35 @@ terraform apply -auto-approve -compact-warnings
 terraform destroy -auto-approve -compact-warnings
 ```
 
+### Install the dependencies
+
+```sh
+corepack enable
+pnpm install
+```
+
+### Linting
+
+```sh
+pnpm run lint
+pnpm run lint:fix # Lint and auto-fix
+```
+
+### Testing
+
+```sh
+pnpm run test
+```
+
+Currently, the command works as an alias for the `pnpm run lint` command.
+Set up your own testing framework and replace this script as needed.
+
+### Cleaning
+
+```sh
+pnpm run clean
+```
+
 ## 貢献
 
 バグレポート、機能リクエスト、プルリクエストなど、貢献は大歓迎です！  
