@@ -64,6 +64,16 @@ pnpm run up
 pnpm run down
 ```
 
+## 仮想環境デプロイ後の実行確認
+
+```sh
+# サービスの状態確認
+multipass exec automata -- systemctl status automata
+
+# ログの確認
+multipass exec automata -- journalctl -u automata -f
+```
+
 ## 貢献
 
 バグレポート、機能リクエスト、プルリクエストなど、貢献は大歓迎です！  
