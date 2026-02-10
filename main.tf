@@ -3,6 +3,7 @@ provider "multipass" {}
 resource "multipass_instance" "build" {
   cloudinit_file = "${path.module}/cloud-init.yml"
   image          = "resolute"
+  memory         = "1.5G"
   name           = "automata"
 }
 

@@ -8,7 +8,7 @@ GitHub Copilot CLI や Taskwarrior を使用したプレイグラウンド環境
 
 ## システム要件
 
-- 6GB 以上の RAM (macOS・Windowsの場合、さらに +6GB 推奨)
+- 7GB 以上の RAM (macOS・Windowsの場合、さらに +6GB 推奨)
 - 10GB 以上のストレージ容量
 - Multipass v1.16 以降
 - Terraform v1.14 以降
@@ -17,6 +17,7 @@ GitHub Copilot CLI や Taskwarrior を使用したプレイグラウンド環境
 ホスト側で稼働したい場合は、追加で以下の追加インストールも必要です。
 
 - Linux や macOS、WSL などの Unix 系 OS
+- GitHub Copilot CLI
 - Taskwarrior (これが Unix 系 OS でないと動かない)
 
 ## 環境構築
@@ -70,6 +71,22 @@ pnpm run up
 
 # 環境の停止
 pnpm run down
+```
+
+環境構築後、認証を手動で実行してください。
+環境を再構築した場合は **再ログインが必要** です。
+
+```sh
+# 認証（対話式・ホスト側ブラウザで URL を開いて認証）
+multipass exec automata -- .local/bin/copilot login
+```
+
+正しく認証ができているかどうかを確認するために、
+以下のようにプロンプトを投げかけてみてください。
+
+```sh
+multipass exec automata -- .local/bin/copilot \
+  -p "あなたはどのようなことができますか?"
 ```
 
 ## 仮想環境デプロイ後の実行確認

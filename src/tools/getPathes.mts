@@ -2,6 +2,9 @@ import which from 'which';
 
 /** Type definition for the pathes of the required commands. */
 export interface Pathes {
+  /* The path of the GitHub Copilot CLI command. */
+  readonly copilot: string;
+
   /* The path of the TaskWarrior command. */
   readonly taskWarrior: string;
 }
@@ -26,10 +29,14 @@ export const getPathes = async (): Promise<Pathes> => {
   if (pathes) {
     return pathes;
   }
+  const copilot = await getPath('copilot');
+  if (!copilot) {
+    throw new Error('GitHub Copilot CLI is not found in PATH');
+  }
   const taskWarrior = await getPath('task');
   if (!taskWarrior) {
     throw new Error('TaskWarrior is not found in PATH');
   }
-  pathes = { taskWarrior };
+  pathes = { copilot, taskWarrior };
   return pathes;
 };
