@@ -5,6 +5,9 @@
 Terraform 経由で Multipass 仮想環境を使用した、プロジェクト管理の
 Node.js ツール環境をセットアップ・管理するためのプロジェクトです。
 
+GitHub Copilot CLI をインストールしており、仮想環境内での
+AI アシスタント利用が可能です。
+
 ## システム要件
 
 - 6GB 以上の RAM (macOS・Windowsの場合、さらに +6GB 推奨)
@@ -64,6 +67,22 @@ pnpm run up
 
 # 環境の停止
 pnpm run down
+```
+
+環境構築後、認証を手動で実行してください。
+環境を再構築した場合は **再ログインが必要** です。
+
+```sh
+# 認証（対話式・ホスト側ブラウザで URL を開いて認証）
+multipass exec automata -- .local/bin/copilot login
+```
+
+正しく認証ができているかどうかを確認するために、
+以下のようにプロンプトを投げかけてみてください。
+
+```sh
+multipass exec automata -- .local/bin/copilot \
+  -p "あなたはどのようなことができますか?"
 ```
 
 ## 仮想環境デプロイ後の実行確認

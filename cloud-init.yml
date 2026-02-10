@@ -15,6 +15,7 @@ packages:
   - perl
   - wget
 runcmd:
+  - sudo -u ubuntu sh -c 'curl -fsSL https://gh.io/copilot-install | bash'
   - systemctl daemon-reload
   - systemctl enable automata.service
   - apt-get -y autoremove
