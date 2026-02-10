@@ -101,6 +101,17 @@ write_files:
       session:
         # Copilot CLI セッション状態の最大サイズ (MB)
         max_size_mb: 50
+  - path: /etc/skel/.config/gh/config.yml
+    content: |
+      aliases:
+        co: pr checkout
+      browser:
+      editor:
+      git_protocol: https
+      http_unix_socket:
+      pager:
+      prompt: enabled
+      version: 1
   - path: /etc/skel/.local/bin/agent.sh
     permissions: '0755'
     content: |
