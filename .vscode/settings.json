@@ -42,6 +42,7 @@
     ".imgbotconfig": "robots"
   },
   "material-icon-theme.folders.associations": {
+    "copilot": "core",
     "icebox": "prompts",
     "requests": "mail"
   },
