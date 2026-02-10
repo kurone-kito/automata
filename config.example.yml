@@ -1,0 +1,30 @@
+# automata 環境変数サンプルファイル
+# このファイルをコピーして config.yml ファイルを作成し、
+# 必要に応じて値を編集してください。
+# 省略した場合、config.example.yml に設定されている値が既定値となります。
+
+
+# GitHub 関連の設定
+github:
+
+  # GitHub Personal Access Token を指定します。
+  # GitHub Copilot CLI が自身のリポジトリなどで活動するために使用します。
+  # トークンの生成方法については、以下のドキュメントを参照してください。
+  # https://docs.github.com/ja/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+  personalAccessToken: ''
+
+  # GitHub のユーザー ID を指定します。
+  # GitHub Copilot CLI が自身のリポジトリなどで活動するために使用します。
+  userId: ''
+
+# 使用するモデルのカテゴリを指定します。以下の値が使用可能です。
+# あなたの GitHub Copilot アカウントのプレミアムリクエストを消化しますので、
+# 適切なモデルを選択してください。
+# - `lo`: 低コストモデル。簡単なタスクに適しています。
+# - `mid`: 中コストモデル。バランスの取れた性能を提供します。
+# - `hi`: 高コストモデル。 高度なタスクに最適です。
+model: lo
+
+# セッションディレクトリのサイズがこの閾値を超えた場合、
+# 古いセッションデータを削除します。単位はメガバイトです。
+sessionThreshold: 50

@@ -299,6 +299,7 @@ $RECYCLE.BIN/
 pnpm-lock.yaml.*
 
 ### Artifacts ###
+config.yml
 blog/
 requests/
 tasks/
