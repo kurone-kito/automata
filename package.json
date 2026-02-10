@@ -14,10 +14,16 @@
   "license": "MIT",
   "author": "kurone-kito <krone@kit.black> (https://kit.black/)",
   "type": "module",
-  "files": [],
+  "bin": "dist/bin.mjs",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "clean": "rimraf -g \"*.tgz\" \"*.tsbuildinfo\" node_modules/.cache",
+    "bin": "node --enable-source-maps dist/bin.mjs",
+    "build": "tsc",
+    "clean": "rimraf -g \"*.tgz\" \"*.tsbuildinfo\" dist node_modules/.cache",
     "deploy": "pnpm run postup",
+    "dev": "tsc --watch",
     "down": "terraform destroy -auto-approve -compact-warnings",
     "lint": "pnpm run \"/lint:.+:check/\"",
     "lint:biome:check": "biome check",
@@ -31,9 +37,10 @@
     "postup": "pnpm pack && pnpm run \"/postup:.+/\"",
     "postup:deploy": "multipass transfer kurone-kito-automata-*.tgz automata:/tmp/automata.tgz",
     "postup:extract": "multipass exec automata -- sudo /opt/automata/deploy",
+    "prepack": "pnpm run clean && pnpm run build",
     "prepare": "pnpm dlx which -s husky && husky || true",
     "preup": "terraform init -upgrade",
-    "test": "pnpm run lint",
+    "test": "tsc --noEmit",
     "up": "terraform apply -auto-approve -compact-warnings"
   },
   "devDependencies": {

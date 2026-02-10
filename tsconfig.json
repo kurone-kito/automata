@@ -1,5 +1,11 @@
 {
-  "compilerOptions": { "noEmit": true },
+  "compilerOptions": {
+    "lib": ["DOM", "ESNext"],
+    "outDir": "dist",
+    "rootDir": "src",
+    "target": "ES2024"
+  },
+  "exclude": ["*.mjs", "./dist/**"],
   "extends": "@kurone-kito/typescript-config",
   "include": ["./**/*.mjs", "./**/*.mts"]
 }
