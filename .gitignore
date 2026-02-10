@@ -297,3 +297,9 @@ $RECYCLE.BIN/
 ### Node ###
 # pnpm
 pnpm-lock.yaml.*
+
+### Artifacts ###
+blog/
+requests/
+tasks/
+!src/

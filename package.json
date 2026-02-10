@@ -21,7 +21,7 @@
   "scripts": {
     "bin": "node --enable-source-maps dist/bin.mjs",
     "build": "vite build",
-    "clean": "rimraf -g \"*.tgz\" \"*.tsbuildinfo\" dist node_modules/.cache",
+    "clean": "rimraf -g \"*.tgz\" \"*.tsbuildinfo\" blog dist node_modules/.cache requests tasks",
     "deploy": "pnpm run postup",
     "dev": "vite build --watch",
     "down": "terraform destroy -auto-approve -compact-warnings",
@@ -59,6 +59,7 @@
     "@kurone-kito/markdownlint-config": "^0.22.0",
     "@kurone-kito/typescript-config": "^0.22.0-alpha.5",
     "@kurone-kito/vite-lib-config": "^0.22.0-alpha.5",
+    "@types/node": "^25.2.2",
     "@vitest/coverage-v8": "^4.0.18",
     "cspell": "^9.6.4",
     "husky": "^9.1.7",

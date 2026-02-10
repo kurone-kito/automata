@@ -2,8 +2,8 @@
 
 [![Linting](https://github.com/kurone-kito/automate/actions/workflows/lint.yml/badge.svg)](https://github.com/kurone-kito/automate/actions/workflows/lint.yml)
 
-Terraform 経由で Multipass 仮想環境を使用した Node.js アプリケーションの、
-プレイグラウンド環境を簡単にセットアップ・管理するためのプロジェクトです。
+Terraform 経由で Multipass 仮想環境を使用した、プロジェクト管理の
+Node.js ツール環境をセットアップ・管理するためのプロジェクトです。
 
 ## システム要件
 

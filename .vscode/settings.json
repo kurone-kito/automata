@@ -41,6 +41,10 @@
   "material-icon-theme.files.associations": {
     ".imgbotconfig": "robots"
   },
+  "material-icon-theme.folders.associations": {
+    "icebox": "prompts",
+    "requests": "mail"
+  },
   "search.exclude": {
     "**/.terraform/**": true,
     "**/node_modules/**": true

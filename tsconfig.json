@@ -2,7 +2,8 @@
   "compilerOptions": {
     "lib": ["DOM", "ES2024"],
     "noEmit": true,
-    "rootDir": "src"
+    "rootDir": "src",
+    "types": ["node"]
   },
   "exclude": ["*.config.mts", "*.mjs", "./dist/**"],
   "extends": "@kurone-kito/typescript-config",
