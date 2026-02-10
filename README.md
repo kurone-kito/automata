@@ -13,20 +13,7 @@ Terraform 経由で Multipass 仮想環境を使用した Node.js アプリケ�
 - Terraform v1.14 以降
 - Node.js v22、または v24 以降
 
-## 環境の起動・停止
-
-```sh
-# 依存関係の解決
-terraform init -upgrade
-
-# 環境の起動
-terraform apply -auto-approve -compact-warnings
-
-# 環境の停止
-terraform destroy -auto-approve -compact-warnings
-```
-
-## Node.js プロジェクトのセットアップ
+## 環境構築
 
 ### 依存関係の解決
 
@@ -46,6 +33,16 @@ pnpm run lint:fix # Lint and auto-fix
 
 ```sh
 pnpm run clean
+```
+
+## 仮想環境の起動・停止
+
+```sh
+# 環境の起動
+pnpm run up
+
+# 環境の停止 (注意！仮想環境内の全データが消えます！)
+pnpm run down
 ```
 
 ## 貢献

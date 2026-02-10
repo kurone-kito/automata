@@ -17,6 +17,9 @@
   "files": [],
   "scripts": {
     "clean": "rimraf -g \"*.tgz\" \"*.tsbuildinfo\" node_modules/.cache",
+    "down": "pnpm run --workspace-concurrency=1 \"/down:.+/\"",
+    "down:0.terraform": "terraform destroy -auto-approve || true",
+    "down:1.multipass": "multipass delete -p automata || true",
     "lint": "pnpm run --stream \"/lint:check:.+/\"",
     "lint:check:biome": "biome check",
     "lint:check:cspell": "cspell lint --show-suggestions .",
@@ -26,7 +29,10 @@
     "lint:fix:markdown": "markdownlint-cli2 --fix \"**/*.md\"",
     "lint:fix:terraform": "terraform fmt -recursive",
     "prepare": "path-exists husky && husky || true",
-    "test": "pnpm run lint"
+    "test": "pnpm run lint",
+    "up": "pnpm run --workspace-concurrency=1 \"/up:.+/\"",
+    "up:0.init": "terraform init -upgrade",
+    "up:1.apply": "terraform apply -auto-approve"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.2",
