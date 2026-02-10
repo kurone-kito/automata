@@ -9,35 +9,5 @@ AIエージェントを用いて本リポジトリに貢献する際は、
   またはそれ以上の選択肢を提示してください。
   Plan モードの場合は、実装を開始する前にこれらの点をすべて解決してください。
 
-## Development
-
-### Install the dependencies
-
-```sh
-corepack enable
-pnpm install
-```
-
-### Linting
-
-```sh
-pnpm run lint
-pnpm run lint:fix # Lint and auto-fix
-```
-
-### Testing
-
-```sh
-pnpm run test
-```
-
-Currently, the command works as an alias for the `pnpm run lint` command.
-Set up your own testing framework and replace this script as needed.
-
-### Cleaning
-
-```sh
-pnpm run clean
-```
-
-[README.md](../README.md) に仮想環境の起動方法と停止方法が記載されています。
+[README.md](../README.md) にプロジェクトのビルド方法や、
+仮想環境の起動方法と停止方法が記載されています。
