@@ -44,6 +44,9 @@
     "test:vitest": "vitest run --coverage",
     "up": "terraform apply -auto-approve -compact-warnings"
   },
+  "dependencies": {
+    "@kurone-kito/web-toybox-node": "0.1.0-alpha.11"
+  },
   "devDependencies": {
     "@biomejs/biome": "^2.3.14",
     "@commitlint/cli": "^20.4.1",
