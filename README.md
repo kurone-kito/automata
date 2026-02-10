@@ -43,6 +43,9 @@ pnpm run up
 
 # 環境の停止 (注意！仮想環境内の全データが消えます！)
 pnpm run down
+
+# 再構築を伴わない設定配置
+pnpm run deploy
 ```
 
 ## 貢献

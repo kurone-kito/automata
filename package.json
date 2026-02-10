@@ -17,6 +17,10 @@
   "files": [],
   "scripts": {
     "clean": "rimraf -g \"*.tgz\" \"*.tsbuildinfo\" node_modules/.cache",
+    "deploy": "pnpm run --workspace-concurrency=1 \"/deploy:.+/\"",
+    "deploy:0.pack": "pnpm pack --out am.tgz --pack-gzip-level=0",
+    "deploy:1.transfer": "multipass transfer am.tgz automata:/tmp/am.tgz",
+    "deploy:2.extract": "pnpm run multipass /opt/automata/deploy",
     "down": "pnpm run --workspace-concurrency=1 \"/down:.+/\"",
     "down:0.terraform": "terraform destroy -auto-approve || true",
     "down:1.multipass": "multipass delete -p automata || true",
@@ -28,11 +32,13 @@
     "lint:fix:biome": "biome check --write",
     "lint:fix:markdown": "markdownlint-cli2 --fix \"**/*.md\"",
     "lint:fix:terraform": "terraform fmt -recursive",
+    "multipass": "multipass exec automata --",
     "prepare": "path-exists husky && husky || true",
     "test": "pnpm run lint",
     "up": "pnpm run --workspace-concurrency=1 \"/up:.+/\"",
     "up:0.init": "terraform init -upgrade",
-    "up:1.apply": "terraform apply -auto-approve"
+    "up:1.apply": "terraform apply -auto-approve",
+    "up:2.deploy": "pnpm run deploy"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.2",
