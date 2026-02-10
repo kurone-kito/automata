@@ -17,6 +17,7 @@
   "files": [],
   "scripts": {
     "clean": "rimraf -g \"*.tgz\" \"*.tsbuildinfo\" node_modules/.cache",
+    "down": "terraform destroy -auto-approve -compact-warnings",
     "lint": "pnpm run \"/lint:.+:check/\"",
     "lint:biome:check": "biome check",
     "lint:biome:fix": "biome check --write",
@@ -27,7 +28,9 @@
     "lint:terraform:fix": "terraform fmt -recursive",
     "postlint:fix": "pnpm run lint:cspell:check",
     "prepare": "pnpm dlx which -s husky && husky || true",
-    "test": "pnpm run lint"
+    "preup": "terraform init -upgrade",
+    "test": "pnpm run lint",
+    "up": "terraform apply -auto-approve -compact-warnings"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.14",
