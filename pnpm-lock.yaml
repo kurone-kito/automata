@@ -11,6 +11,9 @@ importers:
       '@kurone-kito/web-toybox-node':
         specifier: 0.1.0-alpha.11
         version: 0.1.0-alpha.11
+      type-fest:
+        specifier: ^5.4.4
+        version: 5.4.4
     devDependencies:
       '@biomejs/biome':
         specifier: ^2.3.14
