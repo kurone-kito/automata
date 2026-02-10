@@ -67,6 +67,16 @@ pnpm run down
 pnpm run deploy
 ```
 
+## 仮想環境デプロイ後の実行確認
+
+```sh
+# サービスの状態確認
+pnpm run status
+
+# ログの確認
+pnpm run log
+```
+
 ## 貢献
 
 バグレポート、機能リクエスト、プルリクエストなど、貢献は大歓迎です！  

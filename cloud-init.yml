@@ -11,6 +11,7 @@ packages:
   - nodejs
 runcmd:
   - systemctl daemon-reload
+  - systemctl enable automata.service
   - apt-get -y autoremove
   - apt-get clean
 timezone: Asia/Tokyo
@@ -79,3 +80,5 @@ write_files:
       rm -f /tmp/am.tgz
       sudo mkdir -p /opt/automata/var
       sudo chmod 777 /opt/automata/var
+      sudo systemctl daemon-reload
+      sudo systemctl restart --no-block automata.service
