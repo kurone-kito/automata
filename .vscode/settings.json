@@ -12,7 +12,8 @@
     ".tool-versions": ".node-version, .nvmrc",
     "main.tf": ".terraform.lock.hcl,.terraform.tfstate.lock.info,terraform.tfstate,terraform.tfstate.backup",
     "package.json": ".npmrc, pnpm-lock.yaml, pnpm-workspace.yaml",
-    "tsconfig.json": "*.tsbuildinfo"
+    "tsconfig.json": "*.tsbuildinfo, tsconfig.*.json",
+    "vite.config.mts": "vitest.config.mts"
   },
   "files.associations": {
     "*.tfstate": "json",

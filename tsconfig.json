@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "lib": ["DOM", "ESNext"],
-    "outDir": "dist",
+    "noEmit": true,
     "rootDir": "src",
-    "target": "ES2024"
+    "target": "ES2024",
+    "types": ["rolldown-vite/client"]
   },
-  "exclude": ["*.mjs", "./dist/**"],
+  "exclude": ["*.config.mts", "*.mjs", "./dist/**"],
   "extends": "@kurone-kito/typescript-config",
   "include": ["./**/*.mjs", "./**/*.mts"]
 }
