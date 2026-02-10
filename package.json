@@ -14,13 +14,22 @@
   "license": "MIT",
   "author": "kurone-kito <krone@kit.black> (https://kit.black/)",
   "type": "module",
-  "files": [],
+  "bin": {
+    "automata": "dist/bin.mjs",
+    "ghLogin": "dist/ghLogin.mjs"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "clean": "rimraf -g \"*.tgz\" \"*.tsbuildinfo\" node_modules/.cache",
+    "bin": "node --enable-source-maps dist/bin.mjs",
+    "build": "tsc",
+    "clean": "rimraf -g \"*.tgz\" \"*.tsbuildinfo\" dist node_modules/.cache",
     "deploy": "pnpm run --workspace-concurrency=1 \"/deploy:.+/\"",
     "deploy:0.pack": "pnpm pack --out am.tgz --pack-gzip-level=0",
     "deploy:1.transfer": "multipass transfer am.tgz automata:/tmp/am.tgz",
     "deploy:2.extract": "pnpm run multipass /opt/automata/deploy",
+    "dev": "tsc --watch",
     "down": "pnpm run --workspace-concurrency=1 \"/down:.+/\"",
     "down:0.terraform": "terraform destroy -auto-approve || true",
     "down:1.multipass": "multipass delete -p automata || true",
@@ -32,9 +41,11 @@
     "lint:fix:biome": "biome check --write",
     "lint:fix:markdown": "markdownlint-cli2 --fix \"**/*.md\"",
     "lint:fix:terraform": "terraform fmt -recursive",
+    "login:gh": "node --enable-source-maps dist/ghLogin.mjs",
     "multipass": "multipass exec automata --",
+    "prepack": "pnpm run clean && pnpm run build",
     "prepare": "path-exists husky && husky || true",
-    "test": "pnpm run lint",
+    "test": "tsc --noEmit",
     "up": "pnpm run --workspace-concurrency=1 \"/up:.+/\"",
     "up:0.init": "terraform init -upgrade",
     "up:1.apply": "terraform apply -auto-approve",
