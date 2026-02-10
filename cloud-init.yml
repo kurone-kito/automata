@@ -49,3 +49,13 @@ write_files:
       Pin-Priority: -1
   - path: /etc/skel/.sudo_as_admin_successful
     content: ''
+  - path: /opt/automata/deploy
+    permissions: '0755'
+    content: |
+      #!/bin/sh
+      set -eu
+      sleep 1
+      tar xzvf /tmp/automata.tgz -C /opt/automata
+      rm -f /tmp/automata.tgz
+      mkdir -p /opt/automata/var
+      chmod 777 /opt/automata/var
