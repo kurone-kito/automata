@@ -295,5 +295,8 @@ $RECYCLE.BIN/
 ### THE PROJECT SPECIFIES #################################################
 
 ### Node ###
+# c12
+config.yml
+
 # pnpm
 pnpm-lock.yaml.*

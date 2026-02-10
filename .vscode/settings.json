@@ -7,6 +7,7 @@
     "*.md": "${capture}.*.md",
     "*.mjs": "${capture}.mjs.*",
     "*.mts": "${capture}.*.mts",
+    "config.yml": "config.*.yml",
     ".gitattributes": ".gitignore",
     ".markdownlint.*": ".markdownlint-cli2.*",
     ".tool-versions": ".node-version, .nvmrc",
