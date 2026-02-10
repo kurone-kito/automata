@@ -45,6 +45,7 @@
     "up": "terraform apply -auto-approve -compact-warnings"
   },
   "dependencies": {
+    "@kurone-kito/web-toybox": "0.1.0-alpha.11",
     "@kurone-kito/web-toybox-node": "0.1.0-alpha.11",
     "type-fest": "^5.4.4"
   },

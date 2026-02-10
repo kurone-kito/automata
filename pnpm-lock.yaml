@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@kurone-kito/web-toybox':
+        specifier: 0.1.0-alpha.11
+        version: 0.1.0-alpha.11
       '@kurone-kito/web-toybox-node':
         specifier: 0.1.0-alpha.11
         version: 0.1.0-alpha.11
