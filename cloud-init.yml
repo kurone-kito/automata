@@ -10,6 +10,7 @@ packages:
   - language-pack-ja
   - nodejs
 runcmd:
+  - systemctl daemon-reload
   - apt-get -y autoremove
   - apt-get clean
 timezone: Asia/Tokyo
@@ -49,6 +50,26 @@ write_files:
       Pin-Priority: -1
   - path: /etc/skel/.sudo_as_admin_successful
     content: ''
+  - path: /etc/systemd/system/automata.service
+    content: |
+      [Unit]
+      Description=Automata
+      After=cloud-init.target network-online.target
+      Wants=network-online.target
+
+      [Service]
+      Type=simple
+      User=ubuntu
+      Group=ubuntu
+      WorkingDirectory=/home/ubuntu
+      ExecStart=/opt/automata/package/dist/bin.mjs
+      Restart=always
+      RestartSec=60
+      Environment=HOME=/home/ubuntu
+      Environment=PATH=/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+      [Install]
+      WantedBy=multi-user.target
   - path: /opt/automata/deploy
     permissions: '0755'
     content: |
