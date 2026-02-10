@@ -8,6 +8,7 @@ package_update: true
 package_upgrade: false
 packages:
   - language-pack-ja
+  - nodejs
 runcmd:
   - apt-get -y autoremove
   - apt-get clean
