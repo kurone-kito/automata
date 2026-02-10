@@ -4,6 +4,7 @@ cache:
   cacheStrategy: metadata
   useCache: true
 dictionaries:
+  - cpp-compound-words
   - terraform
 import:
   - '@kurone-kito/cspell-config'
