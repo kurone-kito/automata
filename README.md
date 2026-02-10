@@ -29,6 +29,25 @@ pnpm run lint
 pnpm run lint:fix # Lint and auto-fix
 ```
 
+### 型検証
+
+```sh
+pnpm run test
+```
+
+### ビルド
+
+```sh
+pnpm run build
+pnpm run dev # Watch モード
+```
+
+### ローカル試験実行
+
+```sh
+pnpm run bin
+```
+
 ### クリーンアップ
 
 ```sh

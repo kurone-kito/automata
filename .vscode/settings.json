@@ -3,7 +3,10 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
+    "*.d.mts": "${capture}.mjs, ${capture}.mjs.*, ${capture}.d.mts.*",
     "*.md": "${capture}.*.md",
+    "*.mjs": "${capture}.mjs.*",
+    "*.mts": "${capture}.*.mts",
     ".gitattributes": ".gitignore",
     ".markdownlint.*": ".markdownlint-cli2.*",
     ".tool-versions": ".node-version, .nvmrc",
@@ -28,6 +31,7 @@
     "**/.git/subtree-cache/**": true,
     "**/.husky/_/**": true,
     "**/.terraform/**": true,
+    "**/dist/**": true,
     "**/node_modules/**": true,
     "**/pnpm-lock.yaml.*": true
   },
