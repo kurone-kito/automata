@@ -31,6 +31,7 @@
     "**/.git/subtree-cache/**": true,
     "**/.husky/_/**": true,
     "**/.terraform/**": true,
+    "**/coverage/**": true,
     "**/dist/**": true,
     "**/node_modules/**": true,
     "**/pnpm-lock.yaml.*": true

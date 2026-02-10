@@ -29,10 +29,12 @@ pnpm run lint
 pnpm run lint:fix # Lint and auto-fix
 ```
 
-### 型検証
+### テスト
 
 ```sh
-pnpm run test
+pnpm run test:ts     # TypeScript の型チェック
+pnpm run test:vitest # ユニットテストの実行
+pnpm run test        # 両方のテストを実行
 ```
 
 ### ビルド
