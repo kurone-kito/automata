@@ -1,29 +1,12 @@
-allowCompoundWords: true
+cache:
+  cacheFormat: universal
+  cacheLocation: node_modules/.cache/cspell/.cspell.cache
+  cacheStrategy: metadata
+  useCache: true
 dictionaries:
-  - en_US
-  - en-gb
-  - git
-  - markdown
-  - misc
-  - softwareTerms
   - terraform
-enableGlobDot: true
-features:
-  weighted-suggestions: true
-globRoot: ${cwd}
-ignorePaths:
-  - .*ignore
-  - .git
-  - .github/CODE_OF_CONDUCT.*
-  - .terraform.lock.hcl
-  - .vscode/extensions.json
-  - cspell.config.yml
-language: en,ja
-useGitignore: true
+import:
+  - '@kurone-kito/cspell-config'
 version: '0.2'
 words:
-  - imgbotconfig
-  - kito
-  - kuron
-  - kuroné
   - larstobi
