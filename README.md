@@ -2,7 +2,8 @@
 
 [![Linting](https://github.com/kurone-kito/automate/actions/workflows/lint.yml/badge.svg)](https://github.com/kurone-kito/automate/actions/workflows/lint.yml)
 
-Terraform を使用した、Multipass 仮想環境の自動構築ツール
+Terraform 経由で Multipass 仮想環境を使用した Node.js アプリケーションの、
+プレイグラウンド環境を簡単にセットアップ・管理するためのプロジェクトです。
 
 ## システム要件
 
@@ -10,6 +11,7 @@ Terraform を使用した、Multipass 仮想環境の自動構築ツール
 - 10GB 以上のストレージ容量
 - Multipass v1.16 以降
 - Terraform v1.14 以降
+- Node.js v22、または v24 以降
 
 ## 環境の起動・停止
 
@@ -24,30 +26,23 @@ terraform apply -auto-approve -compact-warnings
 terraform destroy -auto-approve -compact-warnings
 ```
 
-### Install the dependencies
+## Node.js プロジェクトのセットアップ
+
+### 依存関係の解決
 
 ```sh
 corepack enable
 pnpm install
 ```
 
-### Linting
+### 構文チェック
 
 ```sh
 pnpm run lint
 pnpm run lint:fix # Lint and auto-fix
 ```
 
-### Testing
-
-```sh
-pnpm run test
-```
-
-Currently, the command works as an alias for the `pnpm run lint` command.
-Set up your own testing framework and replace this script as needed.
-
-### Cleaning
+### クリーンアップ
 
 ```sh
 pnpm run clean

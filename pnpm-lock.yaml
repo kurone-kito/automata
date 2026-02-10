@@ -4,6 +4,8 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+pnpmfileChecksum: sha256-nVOmFZ6JT8FxIhcN+S5sJXuP1DtIhTre5ZGvjJU+4tk=
+
 importers:
 
   .:
@@ -501,11 +503,59 @@ packages:
     resolution: {integrity: sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ==}
     engines: {node: '>=18'}
 
+  '@types/braces@3.0.5':
+    resolution: {integrity: sha512-SQFof9H+LXeWNz8wDe7oN5zu7ket0qwMu5vZubW4GCJ8Kkeh6nBWUz87+KTz/G3Kqsrp0j/W253XJb3KMEeg3w==}
+
+  '@types/color-convert@1.9.0':
+    resolution: {integrity: sha512-OKGEfULrvSL2VRbkl/gnjjgbbF7ycIlpSsX7Nkab4MOWi5XxmgBYvuiQ7lcCFY5cPDz7MUNaKgxte2VRmtr4Fg==}
+
+  '@types/color-name@2.0.0':
+    resolution: {integrity: sha512-63mTjolMJv75upGaUbT6J3lRDWl6pETPQsaWni9w3dMArhNBpgtHkX8ISb9zLV3YYLPA/SMk8ZGALa3k9WY/aQ==}
+
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
 
+  '@types/function-bind@1.1.10':
+    resolution: {integrity: sha512-DCqXAnivJmYtk2ERufryJbNB606D4ae4PjjD2PC1eboq+mBF1XGlMEMCmoarPAWicKMIpSFoxXlWfgHnWoXvCQ==}
+
+  '@types/git-raw-commits@2.0.4':
+    resolution: {integrity: sha512-PYmTK156j6TilbwtnO2JErH4TCC1izpgP3kRE3KUX35bjBOD2A+syCGeercqHXBcM6wL+DU0WbJB2Gz8fPR+8A==}
+
+  '@types/glob-parent@5.1.3':
+    resolution: {integrity: sha512-p+NciRH8TRvrgISOCQ55CP+lktMmDpOXsp4spULIIz0L4aJ6G9zFX+N0UZ2xulmJRgaQLRxXIp4xHdL6YOQjDg==}
+
+  '@types/js-yaml@4.0.9':
+    resolution: {integrity: sha512-k4MGaQl5TGo/iipqb2UDG2UwjXziSWkh0uysQelTlJpX1qGlpUZYm8PnO4DxG1qBomtJUdYJ6qR6xdIah10JLg==}
+
   '@types/katex@0.16.8':
     resolution: {integrity: sha512-trgaNyfU+Xh2Tc+ABIb44a5AYUpicB3uwirOioeOkNPPbmgRNtcWyDeeFRzjPZENO9Vq8gvVqfhaaXWLlevVwg==}
+
+  '@types/lodash.camelcase@4.3.9':
+    resolution: {integrity: sha512-ys9/hGBfsKxzmFI8hckII40V0ASQ83UM2pxfQRghHAwekhH4/jWtjz/3/9YDy7ZpUd/H0k2STSqmPR28dnj7Zg==}
+
+  '@types/lodash.kebabcase@4.1.9':
+    resolution: {integrity: sha512-kPrrmcVOhSsjAVRovN0lRfrbuidfg0wYsrQa5IYuoQO1fpHHGSme66oyiYA/5eQPVl8Z95OA3HG0+d2SvYC85w==}
+
+  '@types/lodash.mergewith@4.6.9':
+    resolution: {integrity: sha512-fgkoCAOF47K7sxrQ7Mlud2TH023itugZs2bUg8h/KzT+BnZNrR2jAOmaokbLunHNnobXVWOezAeNn/lZqwxkcw==}
+
+  '@types/lodash.snakecase@4.1.9':
+    resolution: {integrity: sha512-emBZJUiNlo+QPXr1junMKXwzHJK9zbFvTVdyAoorFcm1YRsbzkZCYPTVMM9AW+dlnA6utG7vpfvOs8alxv/TMw==}
+
+  '@types/lodash.startcase@4.4.9':
+    resolution: {integrity: sha512-C0M4DlN1pnn2vEEhLHkTHxiRZ+3GlTegpoAEHHGXnuJkSOXyJMHGiSc+SLRzBlFZWHsBkixe6FqvEAEU04g14g==}
+
+  '@types/lodash.upperfirst@4.3.9':
+    resolution: {integrity: sha512-bYhT1QEsk9/ggrFjK86Pb5bnKJgTBbpVA77Ygbb1aW1oiWJNGRbVjSlQ9We/ihB9vVpX5WqDJvbISXlukGR+dQ==}
+
+  '@types/lodash@4.17.23':
+    resolution: {integrity: sha512-RDvF6wTulMPjrNdCoYRC8gNR880JNGT8uB+REUpC2Ns4pRqQJhGz90wh7rgdXDPpCczF3VGktDuFGVnz8zP7HA==}
+
+  '@types/merge2@1.4.4':
+    resolution: {integrity: sha512-WZLSif3sHKMlq6vW22R9ub5f+/CEFFlSCY8actv9WBU/8RMJes5zHog9+8oEVLTkaIPaM8fp8XpLaHZggPWN9Q==}
+
+  '@types/micromatch@4.0.10':
+    resolution: {integrity: sha512-5jOhFDElqr4DKTrTEbnW8DZ4Hz5LRUEmyrGpCMrD/NphYv3nUnaF08xmSLx1rGGnyEs/kFnhiw6dCgcDqMr5PQ==}
 
   '@types/minimist@1.2.5':
     resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
@@ -519,8 +569,29 @@ packages:
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
 
+  '@types/parse-json@4.0.2':
+    resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
+
+  '@types/picomatch@4.0.2':
+    resolution: {integrity: sha512-qHHxQ+P9PysNEGbALT8f8YOSHW0KJu6l2xU8DYY0fu/EmGxXdVnuTLvFUvBgPJMSqXq29SYHveejeAha+4AYgA==}
+
+  '@types/require-from-string@1.2.3':
+    resolution: {integrity: sha512-kxLU5xvefySGpp1Z7VCt4m5AhQJUZ8HjW8ADdeS7GieqFPHLAde007fd9bxeXEsFXyaA0LeWIoQXyXP17mGpIg==}
+
+  '@types/run-parallel@1.1.2':
+    resolution: {integrity: sha512-VTfcfGokDmgvrrDyq4gXv8Psv0NJCTk2dVYP3PSskghSYljtEuX2LUF6rWGg1fZP/BXxt/4urZl6arSx1b/Sgw==}
+
+  '@types/semver@7.7.1':
+    resolution: {integrity: sha512-FmgJfu+MOcQ370SD0ev7EI8TlCAfKYU+B4m5T3yXc1CiRN94g/SZPtsCkk506aUDtlMnFZvasDwHHUcZUEaYuA==}
+
   '@types/unist@2.0.11':
     resolution: {integrity: sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA==}
+
+  '@types/yargs-parser@21.0.3':
+    resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==}
+
+  '@types/yargs@17.0.35':
+    resolution: {integrity: sha512-qUHkeCyQFxMXg79wQfTtfndEC+N9ZZg76HJftDJp+qH2tV7Gj4OJi7l+PiWwJ+pWtW8GwSmqsDj/oymhrTWXjg==}
 
   ajv@8.18.0:
     resolution: {integrity: sha512-PlXPeEWMXMZ7sPYOHqmDyCJzcfNrUr3fGNKtezX14ykXOEIvyK81d+qydx89KY5O71FKMPaQ2vBfBFI5NHR63A==}
@@ -814,6 +885,7 @@ packages:
     resolution: {integrity: sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
+      '@types/picomatch': '*'
       picomatch: ^3 || ^4
     peerDependenciesMeta:
       picomatch:
@@ -1518,6 +1590,7 @@ snapshots:
       '@commitlint/load': 20.4.0(@types/node@25.2.3)(typescript@5.9.3)
       '@commitlint/read': 20.4.0
       '@commitlint/types': 20.4.0
+      '@types/yargs': 17.0.35
       tinyexec: 1.0.2
       yargs: 17.7.2
     transitivePeerDependencies:
@@ -1537,6 +1610,11 @@ snapshots:
   '@commitlint/ensure@20.4.1':
     dependencies:
       '@commitlint/types': 20.4.0
+      '@types/lodash.camelcase': 4.3.9
+      '@types/lodash.kebabcase': 4.1.9
+      '@types/lodash.snakecase': 4.1.9
+      '@types/lodash.startcase': 4.4.9
+      '@types/lodash.upperfirst': 4.3.9
       lodash.camelcase: 4.3.0
       lodash.kebabcase: 4.1.1
       lodash.snakecase: 4.1.1
@@ -1553,6 +1631,7 @@ snapshots:
   '@commitlint/is-ignored@20.4.1':
     dependencies:
       '@commitlint/types': 20.4.0
+      '@types/semver': 7.7.1
       semver: 7.7.4
 
   '@commitlint/lint@20.4.1':
@@ -1568,6 +1647,7 @@ snapshots:
       '@commitlint/execute-rule': 20.0.0
       '@commitlint/resolve-extends': 20.4.0
       '@commitlint/types': 20.4.0
+      '@types/lodash.mergewith': 4.6.9
       cosmiconfig: 9.0.0(typescript@5.9.3)
       cosmiconfig-typescript-loader: 6.2.0(@types/node@25.2.3)(cosmiconfig@9.0.0(typescript@5.9.3))(typescript@5.9.3)
       is-plain-obj: 4.1.0
@@ -1589,6 +1669,8 @@ snapshots:
     dependencies:
       '@commitlint/top-level': 20.4.0
       '@commitlint/types': 20.4.0
+      '@types/git-raw-commits': 2.0.4
+      '@types/minimist': 1.2.5
       git-raw-commits: 4.0.0
       minimist: 1.2.8
       tinyexec: 1.0.2
@@ -1597,6 +1679,7 @@ snapshots:
     dependencies:
       '@commitlint/config-validator': 20.4.0
       '@commitlint/types': 20.4.0
+      '@types/lodash.mergewith': 4.6.9
       global-directory: 4.0.1
       import-meta-resolve: 4.2.0
       lodash.mergewith: 4.6.2
@@ -1868,6 +1951,7 @@ snapshots:
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
       '@nodelib/fs.stat': 2.0.5
+      '@types/run-parallel': 1.1.2
       run-parallel: 1.2.0
 
   '@nodelib/fs.stat@2.0.5': {}
@@ -1879,11 +1963,63 @@ snapshots:
 
   '@sindresorhus/merge-streams@4.0.0': {}
 
+  '@types/braces@3.0.5': {}
+
+  '@types/color-convert@1.9.0':
+    dependencies:
+      '@types/color-name': 2.0.0
+
+  '@types/color-name@2.0.0': {}
+
   '@types/debug@4.1.12':
     dependencies:
       '@types/ms': 2.1.0
 
+  '@types/function-bind@1.1.10': {}
+
+  '@types/git-raw-commits@2.0.4':
+    dependencies:
+      '@types/node': 25.2.3
+
+  '@types/glob-parent@5.1.3': {}
+
+  '@types/js-yaml@4.0.9': {}
+
   '@types/katex@0.16.8': {}
+
+  '@types/lodash.camelcase@4.3.9':
+    dependencies:
+      '@types/lodash': 4.17.23
+
+  '@types/lodash.kebabcase@4.1.9':
+    dependencies:
+      '@types/lodash': 4.17.23
+
+  '@types/lodash.mergewith@4.6.9':
+    dependencies:
+      '@types/lodash': 4.17.23
+
+  '@types/lodash.snakecase@4.1.9':
+    dependencies:
+      '@types/lodash': 4.17.23
+
+  '@types/lodash.startcase@4.4.9':
+    dependencies:
+      '@types/lodash': 4.17.23
+
+  '@types/lodash.upperfirst@4.3.9':
+    dependencies:
+      '@types/lodash': 4.17.23
+
+  '@types/lodash@4.17.23': {}
+
+  '@types/merge2@1.4.4':
+    dependencies:
+      '@types/node': 25.2.3
+
+  '@types/micromatch@4.0.10':
+    dependencies:
+      '@types/braces': 3.0.5
 
   '@types/minimist@1.2.5': {}
 
@@ -1895,10 +2031,27 @@ snapshots:
 
   '@types/normalize-package-data@2.4.4': {}
 
+  '@types/parse-json@4.0.2': {}
+
+  '@types/picomatch@4.0.2': {}
+
+  '@types/require-from-string@1.2.3': {}
+
+  '@types/run-parallel@1.1.2': {}
+
+  '@types/semver@7.7.1': {}
+
   '@types/unist@2.0.11': {}
+
+  '@types/yargs-parser@21.0.3': {}
+
+  '@types/yargs@17.0.35':
+    dependencies:
+      '@types/yargs-parser': 21.0.3
 
   ajv@8.18.0:
     dependencies:
+      '@types/require-from-string': 1.2.3
       fast-deep-equal: 3.1.3
       fast-uri: 3.1.0
       json-schema-traverse: 1.0.0
@@ -1914,6 +2067,7 @@ snapshots:
 
   ansi-styles@4.3.0:
     dependencies:
+      '@types/color-convert': 1.9.0
       color-convert: 2.0.1
 
   ansi-styles@6.2.3: {}
@@ -2025,6 +2179,8 @@ snapshots:
 
   cosmiconfig@9.0.0(typescript@5.9.3):
     dependencies:
+      '@types/js-yaml': 4.0.9
+      '@types/parse-json': 4.0.2
       env-paths: 2.2.1
       import-fresh: 3.3.1
       js-yaml: 4.1.1
@@ -2056,6 +2212,7 @@ snapshots:
   cspell-glob@9.6.4:
     dependencies:
       '@cspell/url': 9.6.4
+      '@types/picomatch': 4.0.2
       picomatch: 4.0.3
 
   cspell-grammar@9.6.4:
@@ -2108,6 +2265,7 @@ snapshots:
       '@cspell/cspell-worker': 9.6.4
       '@cspell/dynamic-import': 9.6.4
       '@cspell/url': 9.6.4
+      '@types/semver': 7.7.1
       ansi-regex: 6.2.2
       chalk: 5.6.2
       chalk-template: 1.1.2
@@ -2184,6 +2342,9 @@ snapshots:
     dependencies:
       '@nodelib/fs.stat': 2.0.5
       '@nodelib/fs.walk': 1.2.8
+      '@types/glob-parent': 5.1.3
+      '@types/merge2': 1.4.4
+      '@types/micromatch': 4.0.10
       glob-parent: 5.1.2
       merge2: 1.4.1
       micromatch: 4.0.8
@@ -2196,7 +2357,9 @@ snapshots:
     dependencies:
       reusify: 1.1.0
 
-  fdir@6.5.0(picomatch@4.0.3):
+  fdir@6.5.0(@types/picomatch@4.0.2)(picomatch@4.0.3):
+    dependencies:
+      '@types/picomatch': 4.0.2
     optionalDependencies:
       picomatch: 4.0.3
 
@@ -2252,6 +2415,7 @@ snapshots:
 
   hasown@2.0.2:
     dependencies:
+      '@types/function-bind': 1.1.10
       function-bind: 1.1.2
 
   hosted-git-info@4.1.0:
@@ -2837,7 +3001,8 @@ snapshots:
 
   tinyglobby@0.2.15:
     dependencies:
-      fdir: 6.5.0(picomatch@4.0.3)
+      '@types/picomatch': 4.0.2
+      fdir: 6.5.0(@types/picomatch@4.0.2)(picomatch@4.0.3)
       picomatch: 4.0.3
 
   to-regex-range@5.0.1:
