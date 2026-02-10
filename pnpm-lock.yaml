@@ -23,6 +23,9 @@ importers:
       execa:
         specifier: ^9.6.1
         version: 9.6.1
+      remeda:
+        specifier: ^2.33.6
+        version: 2.33.6
       type-fest:
         specifier: ^5.4.4
         version: 5.4.4
@@ -2187,6 +2190,9 @@ packages:
 
   rc9@3.0.0:
     resolution: {integrity: sha512-MGOue0VqscKWQ104udASX/3GYDcKyPI4j4F8gu/jHHzglpmy9a/anZK3PNe8ug6aZFl+9GxLtdhe3kVZuMaQbA==}
+
+  remeda@2.33.6:
+    resolution: {integrity: sha512-tazDGH7s75kUPGBKLvhgBEHMgW+TdDFhjUAMdQj57IoWz6HsGa5D2RX5yDUz6IIqiRRvZiaEHzCzWdTeixc/Kg==}
 
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
@@ -4584,6 +4590,8 @@ snapshots:
     dependencies:
       defu: 6.1.4
       destr: 2.0.5
+
+  remeda@2.33.6: {}
 
   require-directory@2.1.1: {}
 

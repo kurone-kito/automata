@@ -42,6 +42,9 @@
   "material-icon-theme.files.associations": {
     ".imgbotconfig": "robots"
   },
+  "material-icon-theme.folders.associations": {
+    "copilot": "core"
+  },
   "search.exclude": {
     "**/.terraform/**": true,
     "**/node_modules/**": true
