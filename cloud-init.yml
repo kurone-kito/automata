@@ -7,8 +7,13 @@ package_reboot_if_required: true
 package_update: true
 package_upgrade: false
 packages:
+  - coreutils-from-uutils
+  - curl
+  - git
   - language-pack-ja
   - nodejs
+  - perl
+  - wget
 runcmd:
   - systemctl daemon-reload
   - systemctl enable automata.service
