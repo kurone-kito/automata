@@ -1,13 +1,17 @@
 import { mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 
+/** Requests folder name */
+const requests = 'requests';
+
 /** Tasks folder name */
 const tasks = 'tasks';
 
 /** List of pathes to create */
 const pathes = [
   'blog',
-  join('requests', 'accepted'),
+  join(requests, 'processing'),
+  join(requests, 'accepted'),
   join(tasks, '0-inbox'),
   join(tasks, '1-doing'),
   join(tasks, '2-projects'),

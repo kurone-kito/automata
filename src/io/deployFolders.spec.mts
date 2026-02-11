@@ -16,6 +16,7 @@ describe('deployFolders', () => {
   it.each([
     'blog',
     join('requests', 'accepted'),
+    join('requests', 'processing'),
     join('tasks', '0-inbox'),
     join('tasks', '1-doing'),
     join('tasks', '2-projects'),
