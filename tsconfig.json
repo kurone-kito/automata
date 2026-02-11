@@ -4,7 +4,7 @@
     "noEmit": true,
     "rootDir": "src",
     "target": "ES2024",
-    "types": ["rolldown-vite/client"]
+    "types": ["node", "rolldown-vite/client"]
   },
   "exclude": ["*.config.mts", "*.mjs", "./dist/**"],
   "extends": "@kurone-kito/typescript-config",

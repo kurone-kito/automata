@@ -60,6 +60,7 @@
     "@kurone-kito/markdownlint-config": "^0.22.0",
     "@kurone-kito/typescript-config": "^0.22.0-alpha.5",
     "@kurone-kito/vite-lib-config": "^0.22.0-alpha.5",
+    "@types/node": "^25.2.3",
     "@vitest/coverage-v8": "^4.0.18",
     "cspell": "^9.6.4",
     "husky": "^9.1.7",
