@@ -3,6 +3,7 @@ import { detectImportWithError } from '@kurone-kito/web-toybox-node';
 import { getConfig } from './config/getConfig.mjs';
 import { isLogin } from './copilot/isLogin.mjs';
 import { deployFolders } from './io/deployFolders.mjs';
+import { pickRequest } from './requests/pickRequest.mjs';
 
 detectImportWithError(import.meta.url);
 await deployFolders();
@@ -11,3 +12,4 @@ if (!(await isLogin())) {
   process.exit(1);
 }
 await getConfig();
+await pickRequest();
