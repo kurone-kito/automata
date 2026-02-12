@@ -90,3 +90,5 @@ write_files:
       mkdir -p /opt/automata/var
       chmod 777 /opt/automata/var
       systemctl restart --no-block automata.service
+      cp -r /opt/automata/package/.github/agents /home/ubuntu/.copilot/
+      chown -R ubuntu:ubuntu /home/ubuntu/.copilot/agents

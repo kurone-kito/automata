@@ -43,6 +43,7 @@
     ".imgbotconfig": "robots"
   },
   "material-icon-theme.folders.associations": {
+    ".github/agents": "prompts",
     "copilot": "core",
     "icebox": "prompts",
     "requests": "mail"

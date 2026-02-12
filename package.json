@@ -16,6 +16,7 @@
   "type": "module",
   "bin": "dist/bin.mjs",
   "files": [
+    ".github/agents",
     "config*.yml",
     "dist"
   ],
