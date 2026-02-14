@@ -1,3 +1,4 @@
+import { searchIndustry } from '../robots/research/industry.mjs';
 import { searchOccupation } from '../robots/research/occupation.mjs';
 import type { RouteItem } from './createAgentRouter.mjs';
 import { createAgentRouter } from './createAgentRouter.mjs';
@@ -19,7 +20,10 @@ const priorityList = [] as const satisfies readonly RouteItem[];
  * These routes are evaluated after the priority routes, and are executed
  * based on their predicate functions and a random percentage chance.
  */
-const shuffleList = [searchOccupation] as const satisfies readonly RouteItem[];
+const shuffleList = [
+  searchIndustry,
+  searchOccupation,
+] as const satisfies readonly RouteItem[];
 
 /**
  * The agent router for the system.

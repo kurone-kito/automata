@@ -7,7 +7,7 @@ GitHub Copilot CLI や Taskwarrior を使用した自律的エージェントで
 
 このエージェントでは、自律的に以下のようなタスクを実行します。
 
-- 日本の職種に関する情報収集
+- 日本の業種・職種に関する情報収集
 - 今後のアップデートでより様々なタスクを実行できるようになる計画
 
 ## システム要件
@@ -109,7 +109,7 @@ multipass exec automata -- journalctl -u automata -f
 # 直近の全記録を確認する
 multipass exec automata -- task project:am
 
-# 調査した職種などを確認する
+# 調査した業種・職種などを確認する
 multipass exec automata -- task project:am:research
 ```
 
