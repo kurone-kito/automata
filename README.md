@@ -3,8 +3,8 @@
 [![Linting](https://github.com/kurone-kito/automate/actions/workflows/lint.yml/badge.svg)](https://github.com/kurone-kito/automate/actions/workflows/lint.yml)
 
 Terraform 経由で Multipass 仮想環境を使用した Node.js アプリケーションで、
-GitHub Copilot CLI を使用したプレイグラウンド環境を簡単にセットアップ、
-管理するためのプロジェクトです。
+GitHub Copilot CLI や Taskwarrior を使用したプレイグラウンド環境を、
+簡単にセットアップ・運用管理するためのプロジェクトです。
 
 ## システム要件
 
@@ -13,6 +13,11 @@ GitHub Copilot CLI を使用したプレイグラウンド環境を簡単にセ�
 - Multipass v1.16 以降
 - Terraform v1.14 以降
 - Node.js v22、または v24 以降
+
+ホスト側で稼働したい場合は、追加で以下の追加インストールも必要です。
+
+- Linux や macOS、WSL などの Unix 系 OS
+- Taskwarrior (これが Unix 系 OS でないと動かない)
 
 ## 環境構築
 
@@ -75,6 +80,13 @@ multipass exec automata -- systemctl status automata
 
 # ログの確認
 multipass exec automata -- journalctl -u automata -f
+```
+
+### AI エージェントの活動記録を確認する
+
+```sh
+# 直近の全記録を確認する
+multipass exec automata -- task project:am
 ```
 
 ## 貢献

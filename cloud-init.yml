@@ -9,6 +9,7 @@ package_upgrade: false
 packages:
   - language-pack-ja
   - nodejs
+  - taskwarrior
 runcmd:
   - systemctl daemon-reload
   - systemctl enable automata.service
@@ -51,6 +52,11 @@ write_files:
       Pin-Priority: -1
   - path: /etc/skel/.sudo_as_admin_successful
     content: ''
+  - path: /etc/skel/.taskrc
+    content: |
+      data.location=~/.task
+      confirmation=0
+      include dark-256.theme
   - path: /etc/systemd/system/automata.service
     content: |
       [Unit]
