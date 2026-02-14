@@ -50,7 +50,8 @@
     "@kurone-kito/web-toybox": "0.1.0-alpha.11",
     "@kurone-kito/web-toybox-node": "0.1.0-alpha.11",
     "c12": "4.0.0-beta.2",
-    "type-fest": "^5.4.4"
+    "type-fest": "^5.4.4",
+    "which": "^6.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.14",
@@ -65,6 +66,7 @@
     "@kurone-kito/typescript-config": "^0.22.0-alpha.5",
     "@kurone-kito/vite-lib-config": "^0.22.0-alpha.5",
     "@types/node": "^25.2.3",
+    "@types/which": "^3.0.4",
     "@vitest/coverage-v8": "^4.0.18",
     "cspell": "^9.6.4",
     "dotenv": "^17.2.4",
