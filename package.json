@@ -50,6 +50,8 @@
     "@kurone-kito/web-toybox": "0.1.0-alpha.11",
     "@kurone-kito/web-toybox-node": "0.1.0-alpha.11",
     "c12": "4.0.0-beta.2",
+    "dargs": "^8.1.0",
+    "execa": "^9.6.1",
     "type-fest": "^5.4.4",
     "which": "^6.0.1"
   },
