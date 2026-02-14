@@ -3,8 +3,12 @@
 [![Linting](https://github.com/kurone-kito/automate/actions/workflows/lint.yml/badge.svg)](https://github.com/kurone-kito/automate/actions/workflows/lint.yml)
 
 Terraform 経由で Multipass 仮想環境を使用した Node.js アプリケーションで、
-GitHub Copilot CLI や Taskwarrior を使用したプレイグラウンド環境を、
-簡単にセットアップ・運用管理するためのプロジェクトです。
+GitHub Copilot CLI や Taskwarrior を使用した自律的エージェントです。
+
+このエージェントでは、自律的に以下のようなタスクを実行します。
+
+- 日本の職種に関する情報収集
+- 今後のアップデートでより様々なタスクを実行できるようになる計画
 
 ## システム要件
 
@@ -104,6 +108,9 @@ multipass exec automata -- journalctl -u automata -f
 ```sh
 # 直近の全記録を確認する
 multipass exec automata -- task project:am
+
+# 調査した職種などを確認する
+multipass exec automata -- task project:am:research
 ```
 
 ## 貢献
