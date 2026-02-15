@@ -2,8 +2,7 @@
 import { detectImportWithError } from '@kurone-kito/web-toybox-node';
 import { getConfig } from './config/getConfig.mjs';
 import { isLogin } from './copilot/isLogin.mjs';
-import { searchOccupation } from './robots/research/occupation.mjs';
-import { getTasks } from './tasks/getTasks.mjs';
+import { agentRouter } from './facade/agentRouter.mjs';
 import { getPathes } from './tools/getPathes.mjs';
 
 detectImportWithError(import.meta.url);
@@ -14,6 +13,4 @@ if (!(await isLogin())) {
 const { model } = await getConfig();
 console.log(`Using model: ${model}`);
 await getPathes();
-if ((await getTasks('research', ['occupation'])).length < 100) {
-  console.log(await searchOccupation(model));
-}
+console.log(await agentRouter(model));
