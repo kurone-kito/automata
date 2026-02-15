@@ -43,7 +43,8 @@
     ".imgbotconfig": "robots"
   },
   "material-icon-theme.folders.associations": {
-    "copilot": "core"
+    "copilot": "core",
+    "facade": "controller"
   },
   "search.exclude": {
     "**/.terraform/**": true,
