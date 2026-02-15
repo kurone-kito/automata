@@ -1,4 +1,5 @@
 import { searchIndustry } from '../robots/research/industry.mjs';
+import { searchMergeIO } from '../robots/research/mergeIO.mjs';
 import { searchOccupation } from '../robots/research/occupation.mjs';
 import type { RouteItem } from './createAgentRouter.mjs';
 import { createAgentRouter } from './createAgentRouter.mjs';
@@ -22,6 +23,7 @@ const priorityList = [] as const satisfies readonly RouteItem[];
  */
 const shuffleList = [
   searchIndustry,
+  searchMergeIO,
   searchOccupation,
 ] as const satisfies readonly RouteItem[];
 
