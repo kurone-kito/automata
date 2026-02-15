@@ -1,6 +1,7 @@
 import { searchIndustry } from '../robots/research/industry.mjs';
 import { searchMergeIO } from '../robots/research/mergeIO.mjs';
 import { searchOccupation } from '../robots/research/occupation.mjs';
+import { searchTrendsGenre } from '../robots/research/trendsGenre.mts';
 import type { RouteItem } from './createAgentRouter.mjs';
 import { createAgentRouter } from './createAgentRouter.mjs';
 
@@ -25,6 +26,7 @@ const shuffleList = [
   searchIndustry,
   searchMergeIO,
   searchOccupation,
+  searchTrendsGenre,
 ] as const satisfies readonly RouteItem[];
 
 /**
