@@ -33,4 +33,6 @@ words:
   - nocaps
   - setxkbmap
   - skel
+  - xorg
+  - xrdp
   - xsessionrc

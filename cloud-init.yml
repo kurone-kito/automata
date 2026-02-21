@@ -28,6 +28,8 @@ packages:
   - x11-xkb-utils
   - xfce4
   - xfce4-terminal
+  - xorgxrdp
+  - xrdp
 runcmd:
   - /usr/local/sbin/update-docker-sources
   - sudo apt-get install -y docker-ce docker-ce-cli docker-ce-rootless-extras containerd.io docker-buildx-plugin docker-compose-plugin
