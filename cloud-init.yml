@@ -7,6 +7,9 @@ package_reboot_if_required: true
 package_update: true
 package_upgrade: true
 packages:
+  - ca-certificates
+  - curl
+  - gnupg
   - language-pack-ja
 runcmd:
   - apt-get autoremove -y
