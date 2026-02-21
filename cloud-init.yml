@@ -23,6 +23,7 @@ packages:
 runcmd:
   - /usr/local/sbin/update-docker-sources
   - sudo apt-get install -y docker-ce docker-ce-cli docker-ce-rootless-extras containerd.io docker-buildx-plugin docker-compose-plugin
+  - sudo -u ubuntu bash -ic /usr/local/bin/install-nvm
   - apt-get autoremove -y
   - apt-get clean
 timezone: Asia/Tokyo
@@ -137,6 +138,18 @@ write_files:
       Signed-By: /etc/apt/keyrings/docker.asc
   - path: /etc/skel/.sudo_as_admin_successful
     content: ''
+  - path: /usr/local/bin/install-nvm
+    permissions: '0755'
+    content: |
+      #!/bin/bash
+      if [ -d "${HOME}/.nvm" ]; then
+        echo "nvm is already installed at ${HOME}/.nvm"
+        exit 0
+      fi
+      curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/HEAD/install.sh | bash -
+      . "${HOME}/.nvm/nvm.sh"
+      nvm install --lts
+      nvm use --lts
   - path: /usr/local/sbin/update-docker-sources
     permissions: '0755'
     content: |
