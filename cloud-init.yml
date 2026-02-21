@@ -7,7 +7,10 @@ package_reboot_if_required: true
 package_update: true
 package_upgrade: true
 packages:
-  - locales
+  - ca-certificates
+  - curl
+  - gnupg
+  - language-pack-ja
 timezone: Asia/Tokyo
 write_files:
   - path: /etc/apt/preferences.d/999-hold-kernel.pref

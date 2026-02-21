@@ -8,7 +8,8 @@ cd "$(cd "$(dirname "$0")"; pwd)/.."
 sudo apt-get update
 sudo apt-get upgrade -y
 
-sudo apt-get install -y --no-install-recommends locales
+sudo apt-get install -y --no-install-recommends ca-certificates curl \
+  gnupg locales
 
 sudo apt-get autoremove -y
 sudo apt-get clean
