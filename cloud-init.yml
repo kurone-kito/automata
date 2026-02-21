@@ -7,13 +7,17 @@ package_reboot_if_required: true
 package_update: true
 package_upgrade: true
 packages:
+  - build-essential
   - ca-certificates
+  - cmake
   - curl
+  - g++
   - gnupg
   - gh
   - gist
   - git
   - language-pack-ja
+  - make
 timezone: Asia/Tokyo
 write_files:
   - path: /etc/apt/preferences.d/999-hold-kernel.pref
