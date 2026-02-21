@@ -30,6 +30,19 @@ words:
   - kuron
   - kuroné
   - larstobi
+  - libasound
+  - libatk
+  - libatspi
+  - libnspr
+  - libgbm
+  - libpango
+  - libx
+  - libxcomposite
+  - libxdamage
+  - libxext
+  - libxfixes
+  - libxkbcommon
+  - libxrandr
   - nocaps
   - nopw
   - rfbport
