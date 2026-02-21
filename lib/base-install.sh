@@ -9,7 +9,7 @@ sudo apt-get update
 sudo apt-get upgrade -y
 
 sudo apt-get install -y --no-install-recommends ca-certificates curl \
-  gnupg locales
+  gh gist git gnupg locales
 
 sudo apt-get autoremove -y
 sudo apt-get clean

@@ -10,6 +10,9 @@ packages:
   - ca-certificates
   - curl
   - gnupg
+  - gh
+  - gist
+  - git
   - language-pack-ja
 timezone: Asia/Tokyo
 write_files:
