@@ -24,6 +24,7 @@ runcmd:
   - /usr/local/sbin/update-docker-sources
   - sudo apt-get install -y docker-ce docker-ce-cli docker-ce-rootless-extras containerd.io docker-buildx-plugin docker-compose-plugin
   - sudo -u ubuntu bash -ic /usr/local/bin/install-nvm
+  - sudo -u ubuntu /usr/local/bin/install-homebrew
   - apt-get autoremove -y
   - apt-get clean
 timezone: Asia/Tokyo
@@ -138,6 +139,18 @@ write_files:
       Signed-By: /etc/apt/keyrings/docker.asc
   - path: /etc/skel/.sudo_as_admin_successful
     content: ''
+  - path: /usr/local/bin/install-homebrew
+    permissions: '0755'
+    content: |
+      #!/bin/sh
+      set -eu
+      if [ ! -d "${HOME}/.linuxbrew" ]; then
+        curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash -
+        echo >> "${HOME}/.bashrc"
+        echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> "${HOME}/.bashrc"
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      fi
+      brew update
   - path: /usr/local/bin/install-nvm
     permissions: '0755'
     content: |
