@@ -1,4 +1,7 @@
 #cloud-config
+chpasswd:
+  expire: false
+  list: ubuntu:ubuntu
 keyboard:
   layout: jp
   model: jp106

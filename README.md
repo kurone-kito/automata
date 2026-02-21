@@ -24,6 +24,9 @@ terraform apply -auto-approve
 terraform destroy -auto-approve
 ```
 
+- ユーザー名: `ubuntu`
+- パスワード: `ubuntu`
+
 ## 貢献
 
 バグレポート、機能リクエスト、プルリクエストなど、貢献は大歓迎です！  
