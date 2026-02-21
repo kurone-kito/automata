@@ -14,6 +14,7 @@ packages:
   - ca-certificates
   - cmake
   - curl
+  - dbus-x11
   - fonts-ipafont-gothic
   - g++
   - gnupg
@@ -26,10 +27,12 @@ packages:
   - python3-pip
   - x11-utils
   - x11-xkb-utils
+  - x11vnc
   - xfce4
   - xfce4-terminal
   - xorgxrdp
   - xrdp
+  - xvfb
 runcmd:
   - /usr/local/sbin/update-docker-sources
   - sudo apt-get install -y docker-ce docker-ce-cli docker-ce-rootless-extras containerd.io docker-buildx-plugin docker-compose-plugin
@@ -38,6 +41,10 @@ runcmd:
   - localectl set-locale LANG=ja_JP.UTF-8
   - localectl set-keymap jp
   - localectl set-x11-keymap jp
+  - systemctl daemon-reload
+  - systemctl enable --now xvfb
+  - systemctl enable --now xfce-headless
+  - systemctl enable --now x11vnc
   - apt-get autoremove -y
   - apt-get clean
 timezone: Asia/Tokyo
@@ -163,6 +170,50 @@ write_files:
       # vim: set ft=ruby :
 
       brew "task"
+  - path: /etc/systemd/system/x11vnc.service
+    content: |
+      [Unit]
+      Description=VNC mirror for DISPLAY :99
+      After=xfce-headless.service
+      Requires=xfce-headless.service
+
+      [Service]
+      User=ubuntu
+      Environment=DISPLAY=:99
+      ExecStart=/usr/bin/x11vnc -display :99 -nopw -listen 0.0.0.0 -rfbport 5900 -forever
+      Restart=always
+
+      [Install]
+      WantedBy=multi-user.target
+  - path: /etc/systemd/system/xfce-headless.service
+    content: |
+      [Unit]
+      Description=Headless Xfce4 session
+      After=xvfb.service
+      Requires=xvfb.service
+
+      [Service]
+      User=ubuntu
+      Environment=DISPLAY=:99
+      ExecStart=/usr/bin/startxfce4
+      Restart=always
+
+      [Install]
+      WantedBy=multi-user.target
+  - path: /etc/systemd/system/xvfb.service
+    content: |
+      [Unit]
+      Description=Virtual X framebuffer
+      After=network.target
+
+      [Service]
+      User=ubuntu
+      Environment=DISPLAY=:99
+      ExecStart=/usr/bin/Xvfb :99 -screen 0 1280x720x24 -nolisten tcp
+      Restart=always
+
+      [Install]
+      WantedBy=multi-user.target
   - path: /usr/local/bin/install-homebrew
     permissions: '0755'
     content: |
