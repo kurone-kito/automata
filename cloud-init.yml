@@ -14,6 +14,7 @@ packages:
   - ca-certificates
   - cmake
   - curl
+  - fonts-ipafont-gothic
   - g++
   - gnupg
   - gh
@@ -23,11 +24,18 @@ packages:
   - make
   - python3
   - python3-pip
+  - x11-utils
+  - x11-xkb-utils
+  - xfce4
+  - xfce4-terminal
 runcmd:
   - /usr/local/sbin/update-docker-sources
   - sudo apt-get install -y docker-ce docker-ce-cli docker-ce-rootless-extras containerd.io docker-buildx-plugin docker-compose-plugin
   - sudo -u ubuntu bash -ic /usr/local/bin/install-nvm
   - sudo -u ubuntu /usr/local/bin/install-homebrew
+  - localectl set-locale LANG=ja_JP.UTF-8
+  - localectl set-keymap jp
+  - localectl set-x11-keymap jp
   - apt-get autoremove -y
   - apt-get clean
 timezone: Asia/Tokyo
@@ -133,6 +141,13 @@ write_files:
       Package: linux-virtual*
       Pin: release a=*
       Pin-Priority: -1
+  - path: /etc/skel/.sudo_as_admin_successful
+    content: ''
+  - path: /etc/skel/.xsessionrc
+    content: setxkbmap -layout jp -model jp106 -option ctrl:nocaps
+  - path: /etc/skel/Brewfile
+    content: |
+      brew "task"
   - path: /etc/apt/sources.list.d/docker.sources
     content: |
       Types: deb
@@ -140,8 +155,6 @@ write_files:
       Suites: resolute
       Components: stable
       Signed-By: /etc/apt/keyrings/docker.asc
-  - path: /etc/skel/.sudo_as_admin_successful
-    content: ''
   - path: /etc/skel/Brewfile
     content: |
       # -*- mode: ruby -*-

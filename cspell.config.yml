@@ -1,5 +1,6 @@
 allowCompoundWords: true
 dictionaries:
+  - cpp-compound-words
   - docker
   - en_US
   - en-gb
@@ -29,3 +30,7 @@ words:
   - kuron
   - kuroné
   - larstobi
+  - nocaps
+  - setxkbmap
+  - skel
+  - xsessionrc
