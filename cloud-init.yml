@@ -10,6 +10,9 @@ packages:
   - ca-certificates
   - curl
   - gnupg
+  - gh
+  - gist
+  - git
   - language-pack-ja
 runcmd:
   - /usr/local/sbin/update-docker-sources
