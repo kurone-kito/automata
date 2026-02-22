@@ -139,6 +139,12 @@ write_files:
       Signed-By: /etc/apt/keyrings/docker.asc
   - path: /etc/skel/.sudo_as_admin_successful
     content: ''
+  - path: /etc/skel/Brewfile
+    content: |
+      # -*- mode: ruby -*-
+      # vim: set ft=ruby :
+
+      brew "task"
   - path: /usr/local/bin/install-homebrew
     permissions: '0755'
     content: |
@@ -150,7 +156,9 @@ write_files:
         echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> "${HOME}/.bashrc"
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
       fi
+      brew bundle --file "${HOME}/Brewfile"
       brew update
+      echo yes | task
   - path: /usr/local/bin/install-nvm
     permissions: '0755'
     content: |
