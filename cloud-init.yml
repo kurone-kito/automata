@@ -59,6 +59,7 @@ runcmd:
   - sudo apt-get install -y docker-ce docker-ce-cli docker-ce-rootless-extras containerd.io docker-buildx-plugin docker-compose-plugin
   - sudo -u ubuntu bash -ic /usr/local/bin/install-nvm
   - sudo -u ubuntu /usr/local/bin/install-homebrew
+  - sudo -u ubuntu /usr/local/bin/launch-chromadb
   - localectl set-locale LANG=ja_JP.UTF-8
   - localectl set-keymap jp
   - localectl set-x11-keymap jp
@@ -262,6 +263,33 @@ write_files:
       nvm install --lts
       nvm use --lts
       echo y | npx playwright install chromium
+  - path: /usr/local/bin/launch-chromadb
+    permissions: '0755'
+    content: |
+      #!/bin/sh
+      set -eu
+      CHROMA_CONTAINER="chromadb"
+      CHROMA_IMAGE="chromadb/chroma:latest"
+      CHROMA_PORT="8000"
+      CHROMA_DATA_DIR="${HOME}/.local/share/chromadb"
+      mkdir -p "${CHROMA_DATA_DIR}"
+      # Check if container is already running
+      if docker ps --format '{{.Names}}' | grep -q "^${CHROMA_CONTAINER}$"
+      then
+        exit 0
+      fi
+      # Check if container exists but is stopped
+      if docker ps -a --format '{{.Names}}' | grep -q "^${CHROMA_CONTAINER}$"
+      then
+        docker start "${CHROMA_CONTAINER}"
+      else
+        # Create and start the container
+        docker run -d \
+          --name "${CHROMA_CONTAINER}" \
+          -p "${CHROMA_PORT}:8000" \
+          -v "${CHROMA_DATA_DIR}:/chroma/data" \
+          "${CHROMA_IMAGE}"
+      fi
   - path: /usr/local/sbin/update-docker-sources
     permissions: '0755'
     content: |
