@@ -1,5 +1,6 @@
 allowCompoundWords: true
 dictionaries:
+  - docker
   - en_US
   - en-gb
   - git
@@ -22,6 +23,7 @@ language: en,ja
 useGitignore: true
 version: '0.2'
 words:
+  - buildx
   - imgbotconfig
   - kito
   - kuron
