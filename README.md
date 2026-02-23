@@ -6,7 +6,7 @@ Linux 環境構築の実験用リポジトリ
 
 ## システム要件
 
-- Linux ベースの OS
+- Debian 系の Linux OS
 
 ## セットアップ
 
