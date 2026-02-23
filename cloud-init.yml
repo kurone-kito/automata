@@ -55,7 +55,7 @@ packages:
   - xrdp
   - xvfb
 runcmd:
-  - /usr/local/sbin/update-docker-sources
+  - /usr/local/bin/update-docker-sources
   - sudo apt-get install -y docker-ce docker-ce-cli docker-ce-rootless-extras containerd.io docker-buildx-plugin docker-compose-plugin
   - sudo -u ubuntu bash -ic /usr/local/bin/install-nvm
   - sudo -u ubuntu /usr/local/bin/install-homebrew
@@ -263,34 +263,41 @@ write_files:
       nvm install --lts
       nvm use --lts
       echo y | npx playwright install chromium
+  - path: /etc/skel/.local/share/chromadb/compose.yml
+    owner: 'ubuntu:ubuntu'
+    content: |
+      services:
+        chromadb:
+          image: chromadb/chroma:latest
+          ports:
+            - '8000:8000'
+          volumes:
+            - ~/.local/share/chromadb:/chroma/data
+          restart: unless-stopped
   - path: /usr/local/bin/launch-chromadb
     permissions: '0755'
     content: |
       #!/bin/sh
       set -eu
-      CHROMA_CONTAINER="chromadb"
-      CHROMA_IMAGE="chromadb/chroma:latest"
-      CHROMA_PORT="8000"
       CHROMA_DATA_DIR="${HOME}/.local/share/chromadb"
-      mkdir -p "${CHROMA_DATA_DIR}"
-      # Check if container is already running
-      if docker ps --format '{{.Names}}' | grep -q "^${CHROMA_CONTAINER}$"
-      then
-        exit 0
-      fi
-      # Check if container exists but is stopped
-      if docker ps -a --format '{{.Names}}' | grep -q "^${CHROMA_CONTAINER}$"
-      then
-        docker start "${CHROMA_CONTAINER}"
-      else
-        # Create and start the container
-        docker run -d \
-          --name "${CHROMA_CONTAINER}" \
-          -p "${CHROMA_PORT}:8000" \
-          -v "${CHROMA_DATA_DIR}:/chroma/data" \
-          "${CHROMA_IMAGE}"
-      fi
-  - path: /usr/local/sbin/update-docker-sources
+      RETRY_MAX=5
+      RETRY_DELAY=15
+      # Pull image with retry to handle transient network failures
+      i=1
+      while [ "${i}" -le "${RETRY_MAX}" ]; do
+        if docker compose -f "${CHROMA_DATA_DIR}/compose.yml" pull; then
+          break
+        fi
+        echo "[launch-chromadb] pull failed (attempt ${i}/${RETRY_MAX}), retrying in ${RETRY_DELAY}s..."
+        i=$((i + 1))
+        sleep "${RETRY_DELAY}"
+        if [ "${i}" -gt "${RETRY_MAX}" ]; then
+          echo "[launch-chromadb] pull failed after ${RETRY_MAX} attempts, aborting."
+          exit 1
+        fi
+      done
+      docker compose -f "${CHROMA_DATA_DIR}/compose.yml" up -d
+  - path: /usr/local/bin/update-docker-sources
     permissions: '0755'
     content: |
       #!/bin/sh
