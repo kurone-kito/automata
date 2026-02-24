@@ -12,3 +12,6 @@ VM='automata'
 multipass stop "${VM}"
 multipass snapshot -n vanilla "${VM}" || true
 multipass start "${VM}"
+
+tar --format ustar -cvf "${VM}.tar" setup lib/*
+multipass transfer "${VM}.tar" "${VM}:.local/src/automata.tar"
