@@ -32,7 +32,21 @@ write_files:
       Package: linux-virtual*
       Pin: release a=*
       Pin-Priority: -1
-  - path: /etc/skel/.local/src/.gitkeep
+  - path: /etc/skel/.local/src/automata/.gitkeep
     content: ''
   - path: /etc/skel/.sudo_as_admin_successful
     content: ''
+  - path: /usr/local/bin/automata-setup
+    permissions: '0755'
+    content: |
+      #!/bin/sh
+      set -eu
+
+      if [ ! -f "${HOME}/.local/src/automata.tar" ]
+      then
+        echo "Aborted: No automata.tar found in ${HOME}/.local/src/"
+        exit 1
+      fi
+      tar -xvf "${HOME}/.local/src/automata.tar" -C "${HOME}/.local/src/automata"
+      rm "${HOME}/.local/src/automata.tar"
+      "${HOME}/.local/src/automata/setup"

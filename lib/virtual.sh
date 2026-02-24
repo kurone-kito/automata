@@ -15,3 +15,4 @@ multipass start "${VM}"
 
 tar --format ustar -cvf "${VM}.tar" setup lib/*
 multipass transfer "${VM}.tar" "${VM}:.local/src/automata.tar"
+multipass exec "${VM}" -- /usr/local/bin/automata-setup
