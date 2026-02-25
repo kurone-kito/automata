@@ -18,6 +18,8 @@ packages:
   - git
   - language-pack-ja
   - make
+  - python3
+  - python3-pip
 timezone: Asia/Tokyo
 write_files:
   - path: /etc/apt/preferences.d/999-hold-kernel.pref
