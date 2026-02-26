@@ -30,6 +30,7 @@ fi
 
 lib/base-install.sh
 lib/docker.sh
+lib/homebrew.sh
 lib/locale.sh
 
 sudo apt-get autoremove -y
