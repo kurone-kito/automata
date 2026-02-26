@@ -5,11 +5,13 @@
 set -eu
 cd "$(cd "$(dirname "$0")"; pwd)/.."
 
-if [ ! -d "${HOME}/.linuxbrew" ]; then
+if [ ! -d "${HOME}/.linuxbrew" ]
+then
   curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash -
   echo >> "${HOME}/.bashrc"
   echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> "${HOME}/.bashrc"
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+brew bundle --file=lib/Brewfile
 brew update

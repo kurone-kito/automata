@@ -1,0 +1,4 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+
+brew "task"
