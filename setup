@@ -29,4 +29,8 @@ then
 fi
 
 lib/base-install.sh
+lib/docker.sh
 lib/locale.sh
+
+sudo apt-get autoremove -y
+sudo apt-get clean
